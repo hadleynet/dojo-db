@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  forename: MyString
+  surname: MyString
+  birthdate: 2015-01-22
+  active: false
+
+two:
+  id: 1
+  forename: MyString
+  surname: MyString
+  birthdate: 2015-01-22
+  active: false

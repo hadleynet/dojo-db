@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2015-01-22
+  person_id: 1
+  style_id: 1
+  count: 1
+
+two:
+  date: 2015-01-22
+  person_id: 1
+  style_id: 1
+  count: 1

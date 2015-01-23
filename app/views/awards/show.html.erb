@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @award.date %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @award.person_id %>
+</p>
+
+<p>
+  <strong>Rank:</strong>
+  <%= @award.rank_id %>
+</p>
+
+<%= link_to 'Edit', edit_award_path(@award) %> |
+<%= link_to 'Back', awards_path %>

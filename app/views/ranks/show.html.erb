@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @rank.id %>
+</p>
+
+<p>
+  <strong>Style Id:</strong>
+  <%= @rank.style_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rank.name %>
+</p>
+
+<p>
+  <strong>Translation:</strong>
+  <%= @rank.translation %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @rank.order %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @rank.active %>
+</p>
+
+<p>
+  <strong>Class delta:</strong>
+  <%= @rank.class_delta %>
+</p>
+
+<p>
+  <strong>Next rank test id:</strong>
+  <%= @rank.next_rank_test_id %>
+</p>
+
+<p>
+  <strong>Belt color id:</strong>
+  <%= @rank.belt_color_id %>
+</p>
+
+<p>
+  <strong>Stripe color id:</strong>
+  <%= @rank.stripe_color_id %>
+</p>
+
+<p>
+  <strong>Stripe count:</strong>
+  <%= @rank.stripe_count %>
+</p>
+
+<%= link_to 'Edit', edit_rank_path(@rank) %> |
+<%= link_to 'Back', ranks_path %>

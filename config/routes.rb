@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  resources :attendances
+
+  resources :awards
+
+  resources :styles
+
+  resources :tests
+
+  resources :colors
+
+  resources :ranks
+
+  resources :people
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
