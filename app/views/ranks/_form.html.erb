@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :style_id %><br>
-    <%= f.text_field :style_id %>
+    <%= f.collection_select :style_id, Style.all, :id, :description %>
   </div>
   <div class="field">
     <%= f.label :name %><br>
@@ -37,15 +37,15 @@
   </div>
   <div class="field">
     <%= f.label :next_rank_test_id %><br>
-    <%= f.text_field :next_rank_test_id %>
+    <%= f.collection_select :next_rank_test_id, Test.all, :id, :description %>
   </div>
   <div class="field">
     <%= f.label :belt_color_id %><br>
-    <%= f.text_field :belt_color_id %>
+    <%= f.collection_select :belt_color_id, Color.all, :id, :description %>
   </div>
   <div class="field">
     <%= f.label :stripe_color_id %><br>
-    <%= f.text_field :stripe_color_id %>
+    <%= f.collection_select :stripe_color_id, Color.all, :id, :description %>
   </div>
   <div class="field">
     <%= f.label :stripe_count %><br>
