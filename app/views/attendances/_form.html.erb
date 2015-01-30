@@ -16,15 +16,15 @@
     <%= f.date_select :date %>
   </div>
   <div class="field">
-    <%= f.label :person_id %><br>
-    <%= f.number_field :person_id %>
+    <%= f.label :person %><br>
+    <%= f.collection_select :person_id, Person.where(active: true).order(:surname,:forename), :id, :display_name %>
   </div>
   <div class="field">
-    <%= f.label :style_id %><br>
-    <%= f.number_field :style_id %>
+    <%= f.label :style %><br>
+    <%= f.collection_select :style_id, Style.all, :id, :description %>
   </div>
   <div class="field">
-    <%= f.label :count %><br>
+    <%= f.label :classes %><br>
     <%= f.number_field :count %>
   </div>
   <div class="actions">

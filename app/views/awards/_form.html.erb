@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :person_id %><br>
-    <%= f.number_field :person_id %>
+    <%= f.collection_select :person_id, Person.where(active: true).order(:surname,:forename), :id, :display_name %>
   </div>
   <div class="field">
     <%= f.label :rank_id %><br>
-    <%= f.number_field :rank_id %>
+    <%= f.collection_select :rank_id, Rank.where(active: true).order(:style_id,:order), :id, :style_and_rank %>
   </div>
   <div class="actions">
     <%= f.submit %>

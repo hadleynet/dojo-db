@@ -4,7 +4,7 @@ class AwardsController < ApplicationController
   # GET /awards
   # GET /awards.json
   def index
-    @awards = Award.all
+    @awards = Award.where("date > :date", {date: Date.today-2.months}).order(:date)
   end
 
   # GET /awards/1

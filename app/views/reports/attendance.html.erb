@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Attendance</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>6 months</th>
+      <th>3 months</th>
+      <th>1 month</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attendance.each do |person_and_attendance| %>
+      <% person, classes = person_and_attendance %>
+      <tr>
+        <td><%= person.display_name %></td>
+        <td><%= classes[0] %></td>
+        <td><%= classes[1] %></td>
+        <td><%= classes[2] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

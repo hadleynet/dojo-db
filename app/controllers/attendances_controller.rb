@@ -4,7 +4,7 @@ class AttendancesController < ApplicationController
   # GET /attendances
   # GET /attendances.json
   def index
-    @attendances = Attendance.all
+    @attendances = Attendance.joins(:person).where("date > :date", {date: Date.new(2015, 1, 1)}).order(:date, "people.surname", "people.forename")
   end
 
   # GET /attendances/1
@@ -16,7 +16,7 @@ class AttendancesController < ApplicationController
   def new
     @attendance = Attendance.new
   end
-
+  
   # GET /attendances/1/edit
   def edit
   end

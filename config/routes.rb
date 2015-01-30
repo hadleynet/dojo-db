@@ -13,6 +13,15 @@ Rails.application.routes.draw do
 
   resources :people
 
+  get 'reports' => 'reports#index'
+  get 'reports/promotions_due' => 'reports#promotions_due'
+  get 'reports/recent_promotions' => 'reports#recent_promotions'
+  get 'reports/attendance' => 'reports#attendance'
+  
+  get 'classes' => 'classes#index'
+  get 'classes/attendance' => 'classes#attendance'
+  post 'classes/add' => 'classes#add'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

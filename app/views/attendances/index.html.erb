@@ -17,8 +17,8 @@
     <% @attendances.each do |attendance| %>
       <tr>
         <td><%= attendance.date %></td>
-        <td><%= attendance.person_id %></td>
-        <td><%= attendance.style_id %></td>
+        <td><%= attendance.person.display_name %></td>
+        <td><%= attendance.style.description %></td>
         <td><%= attendance.count %></td>
         <td><%= link_to 'Show', attendance %></td>
         <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>

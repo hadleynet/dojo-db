@@ -4,6 +4,7 @@
 
 <% @ranks_by_style.each do |style_and_ranks|%>
 <% style, ranks = style_and_ranks %>
+<% if ranks and ranks.length>0 %>
 <h2><%= style.description %></h2>
 
 <table>
@@ -41,6 +42,7 @@
   </tbody>
 </table>
 
+<% end %>
 <% end %>
 
 

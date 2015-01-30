@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Classes</h1>
+
+Enter attendance for: <%= form_tag("/classes/attendance", :method => :get) do %>
+  <%= select_date @date %>
+  <%= submit_tag "Submit" %>
+<% end %>

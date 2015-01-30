@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recent Promotions</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Rank</th>
+      <th>Prev Rank</th>
+      <th>Cert</th>
+      <th>Belt</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @promotions.each do |promotion| %>
+      <tr>
+        <td><%= promotion[:date] %></td>
+        <td><%= promotion[:person].display_name %></td>
+        <td><%= promotion[:rank].name %></td>
+        <td><%= promotion[:prev_rank] ? promotion[:prev_rank].name : "" %></td>
+        <td><%= promotion[:cert] ? 'Y' : 'N' %></td>
+        <td><%= promotion[:belt] ? 'Y' : 'N' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

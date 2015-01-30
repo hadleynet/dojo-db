@@ -1,0 +1,29 @@
+<table border="1" width="100%">
+  <thead>
+    <tr>
+      <th width="20%">Name</th>
+      <th width="20%">Rank</th>
+      <th width="10%">Date</th>
+      <th width="10%">Classes</th>
+      <th width="10%">Required</th>
+      <th width="10%">Test</th>
+      <th width="20%">Next Rank</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% promotable.each do |person| %>
+      <% last_promotion = person.last_promotion(style) %>
+      <% rank = last_promotion ? last_promotion.rank : style.ranks.first %>
+      <tr>
+        <td><%= person.display_name %></td>
+        <td><%= rank.name %></td>
+        <td><%= last_promotion ? last_promotion.date : "None" %></td>
+        <td><%= person.classes_since_last_promotion(style) %></td>
+        <td><%= rank.class_delta %></td>
+        <td><%= rank.next_rank_test.description %></td>
+        <td><%= rank.next_rank ? rank.next_rank.name : "TBD" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
