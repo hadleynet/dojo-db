@@ -1,15 +1,51 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :attendance]
 
   # GET /people
   # GET /people.json
   def index
-    @people = Person.where(active: true).order(:surname)
+    @people = Person.active
   end
+  
+  def search
+    if params[:search]
+      @people = Person.search(params[:search])
+      @search = params[:search]
+    else
+      @people = Person.active
+    end
+    render :index
+  end
+  
+  # GET /people/1/attendance.json
+  def attendance
+    @data = {
+      labels: [],
+      datasets: [
+        {
+          fillColor: "rgba(120,120,120,0.5)",
+          strokeColor: "rgba(120,120,120,1)",
+          pointColor: "rgba(120,120,120,1)",
+          pointStrokeColor: "#fff",
+          data: []
+        }
+      ]
+    }
+    Attendance.select("strftime('%Y-%m', date) as month, sum(count) as classes").where("person_id=:person AND date>:date", {person: @person.id, date: Date.today-1.year}).group("month").each do |a|
+      @data[:labels].append(a.month)
+      @data[:datasets][0][:data].append(a.classes)
+    end
 
+    respond_to do |format|
+      format.html { redirect_to @person }
+      format.json { render json: @data }
+    end
+  end
+  
   # GET /people/1
   # GET /people/1.json
   def show
+    @awards = @person.awards.order(:date).reverse_order
   end
 
   # GET /people/new

@@ -7,8 +7,17 @@ class Person < ActiveRecord::Base
     "#{forename} #{surname}"
   end
   
+  def styles
+    Award.joins(:rank).where("awards.person_id=:person", {person:self.id}).pluck("DISTINCT ranks.style_id")
+  end
+  
   def self.active
     Person.where(active: true).order(:surname, :forename)
+  end
+  
+  def self.search(search)
+    search_condition = "%" + search + "%"
+    Person.where('forename LIKE :name OR surname LIKE :name', {name: search_condition})
   end
   
   def self.all_promotable(style, *test_levels)

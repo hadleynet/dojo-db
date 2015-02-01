@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing People</h1>
+<% if @search %>
+<h1>Students Matching: <%= @search %></h1>
+<% else %>
+<h1>Active Students</h1>
+<% end %>
 
 <table>
   <thead>
@@ -21,7 +25,7 @@
         <td><%= person.forename %></td>
         <td><%= person.surname %></td>
         <td><%= person.birthdate %></td>
-        <td><%= person.active %></td>
+        <td><%= person.active ? 'Y' : 'N' %></td>
         <td><%= link_to 'Show', person %></td>
         <td><%= link_to 'Edit', edit_person_path(person) %></td>
       </tr>
@@ -29,6 +33,11 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Person', new_person_path %>
+<div class="no_print"><%= link_to 'New Person', new_person_path %></div>
+<p>
+<div class="no_print">
+<%= form_tag("/people/search", method: "get") do %>
+  <%= text_field_tag :search, params[:search], :id => 'search_field' %>
+  <%= submit_tag "Search" %> 
+<% end %> 
+</div>

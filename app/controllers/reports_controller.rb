@@ -6,10 +6,15 @@ class ReportsController < ApplicationController
 
   # GET /reports/promotions_due
   def promotions_due
-    styles = [1,2].collect {|style_id| Style.find(style_id)}
+    styles = Style.active
     @promotable_without_test_by_style = styles.map do |style|
       [style, Person.all_promotable(style, Test::None, Test::Informal)]
     end
+  end
+
+  # GET /reports/tests_due
+  def tests_due
+    styles = Style.active
     @promotable_with_test_by_style = styles.map do |style|
       [style, Person.all_promotable(style, Test::Formal)]
     end

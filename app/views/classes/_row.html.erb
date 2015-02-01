@@ -1,6 +1,0 @@
-  <tr>
-    <td><%= person.display_name %></td>
-    <% @styles.each do |style| %>
-    <td><%= hidden_field_tag("attendance_#{style.id}[][person]", person.id)%><%= number_field_tag "attendance_#{style.id}[][count]", saved[style.id] %></td>
-    <% end %>
-  </tr>

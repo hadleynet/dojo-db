@@ -4,7 +4,7 @@ class RanksController < ApplicationController
   # GET /ranks
   # GET /ranks.json
   def index
-    @ranks_by_style = Style.all.map {|style| [style, style.ranks.order(:order)]}
+    @ranks_by_style = Style.active.map {|style| [style, style.ranks.order(:order)]}
   end
 
   # GET /ranks/1

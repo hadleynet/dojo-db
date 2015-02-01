@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :attendances
-
   resources :awards
 
   resources :styles
@@ -11,16 +9,24 @@ Rails.application.routes.draw do
 
   resources :ranks
 
-  resources :people
+  resources :people do
+    collection do
+      get 'search'
+    end
+    member do
+      get 'attendance'
+    end
+  end
 
   get 'reports' => 'reports#index'
   get 'reports/promotions_due' => 'reports#promotions_due'
+  get 'reports/tests_due' => 'reports#tests_due'
   get 'reports/recent_promotions' => 'reports#recent_promotions'
   get 'reports/attendance' => 'reports#attendance'
   
-  get 'classes' => 'classes#index'
-  get 'classes/attendance' => 'classes#attendance'
-  post 'classes/add' => 'classes#add'
+  get 'attendances' => 'attendances#index'
+  get 'attendances/attendance' => 'attendances#attendance'
+  post 'attendances/add' => 'attendances#add'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

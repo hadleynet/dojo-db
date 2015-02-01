@@ -1,0 +1,46 @@
+<h1 class="no_print">Attendance for <%= @date.strftime('%A, %B %d, %Y') %></h1>
+
+<%= form_tag "/attendances/add" do %>
+  <%= date_field_tag :date, @date, :hidden => true %>
+  <table>
+  <thead>
+    <tr class="print_only">
+      <th colspan="<%= 1+@styles.length %>">Attendance for <%= @date.strftime('%A, %B %d, %Y') %></th>
+    <tr>
+      <th>Name</th>
+      <% @styles.each do |style| %>
+      <th><%= style.description %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  <% @people.each do |person| %>
+    <%= render partial: "row", locals: {person: person, saved: @attendance[person.id] || {}} %>
+  <% end %>
+  </tbody>
+  </table>
+  <%= submit_tag "Save", :class => 'no_print' %>
+<% end %>
+
+<div class="print_only">
+<h2>New Students</h2>
+
+<table>
+<thead>
+  <tr class="print_only">
+    <th colspan="<%= 1+@styles.length %>">Attendance for <%= @date.strftime('%A, %B %d, %Y') %></th>
+  <tr>
+    <th>Name</th>
+    <% @styles.each do |style| %>
+    <th><%= style.description %></th>
+    <% end %>
+  </tr>
+</thead>
+<tbody>
+<% 3.times do %>
+  <%= render partial: "blank_row" %>
+<% end %>
+</tbody>
+</table>
+
+</div>

@@ -1,74 +1,42 @@
 class AttendancesController < ApplicationController
-  before_action :set_attendance, only: [:show, :edit, :update, :destroy]
 
   # GET /attendances
-  # GET /attendances.json
   def index
-    @attendances = Attendance.joins(:person).where("date > :date", {date: Date.new(2015, 1, 1)}).order(:date, "people.surname", "people.forename")
+    @date = Date.today
   end
 
-  # GET /attendances/1
-  # GET /attendances/1.json
-  def show
-  end
-
-  # GET /attendances/new
-  def new
-    @attendance = Attendance.new
+  # GET /attendances/attendance
+  def attendance
+    @people = Person.active
+    @styles = Style.active
+    @date = params[:date] ? Date.new(params[:date][:year].to_i, params[:date][:month].to_i, params[:date][:day].to_i) : Date.today
+    @attendance = {}
+    Attendance.where(date: @date).each do |a|
+      @attendance[a.person_id] ||= {}
+      @attendance[a.person_id][a.style_id] = a.count
+    end
   end
   
-  # GET /attendances/1/edit
-  def edit
-  end
-
-  # POST /attendances
-  # POST /attendances.json
-  def create
-    @attendance = Attendance.new(attendance_params)
-
-    respond_to do |format|
-      if @attendance.save
-        format.html { redirect_to @attendance, notice: 'Attendance was successfully created.' }
-        format.json { render :show, status: :created, location: @attendance }
-      else
-        format.html { render :new }
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
+  def add
+    date = Date.parse(params["date"])
+    Style.all.each do |style|
+      params["attendance_#{style.id}"].each do |attendance|
+        count = attendance["count"].to_i
+        a = Attendance.where(date: date, person_id: attendance["person"], style: style).first_or_initialize
+        if count > 0
+          a.date = date
+          a.person_id = attendance["person"]
+          a.count = count
+          a.save
+        elsif a.count
+          # remove the old attendance entry, don't want any with class count of zero
+          a.delete
+        end
       end
     end
+    flash[:notice] = 'Attendance Saved'
+    @date = date
+    render :index
   end
-
-  # PATCH/PUT /attendances/1
-  # PATCH/PUT /attendances/1.json
-  def update
-    respond_to do |format|
-      if @attendance.update(attendance_params)
-        format.html { redirect_to @attendance, notice: 'Attendance was successfully updated.' }
-        format.json { render :show, status: :ok, location: @attendance }
-      else
-        format.html { render :edit }
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /attendances/1
-  # DELETE /attendances/1.json
-  def destroy
-    @attendance.destroy
-    respond_to do |format|
-      format.html { redirect_to attendances_url, notice: 'Attendance was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_attendance
-      @attendance = Attendance.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def attendance_params
-      params.require(:attendance).permit(:date, :person_id, :style_id, :count)
-    end
+    
 end
