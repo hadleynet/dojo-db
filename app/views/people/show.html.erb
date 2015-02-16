@@ -4,10 +4,12 @@
 
 <p>
   <strong>Birthdate:</strong> <%= @person.birthdate ? @person.birthdate : "N/A" %>,
-  <strong>Active:</strong> <%= @person.active ? 'Y' : 'N' %>
+  <strong>Currently Active:</strong> <%= @person.active ? 'Y' : 'N' %>,
+  <strong>Total Classes:</strong> <%= @total_classes %> (<%= @total_classes/24 %> days),
+  <strong>Active Since: </strong> <%= @start_date %> (<%= distance_of_time_in_words(@start_date, @date) %>).
 </p>
 
-<h2>Attendance</h2>
+<h2>Attendance Last Year (<%= @total_classes_this_year %> Classes)</h2>
 <canvas id="myChart" width="800" height="300"></canvas>
 <script>
 $.get("<%= attendance_person_path(@person, format: 'json') %>", function(data,status){
@@ -15,28 +17,37 @@ $.get("<%= attendance_person_path(@person, format: 'json') %>", function(data,st
   });
 </script>
 
-<h2>Ranks</h2>
+<h2>Ranks Held</h2>
 
+<table border="1" width="800">
+<tr>
+<% @awards.each do |style_and_awards| %>
+<% style, award_list = style_and_awards %>
+<td valign="top" width="266">
 <table>
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Style</th>
-      <th>Rank</th>
+      <th colspan="2"><%= style.description %></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @awards.each do |award| %>
+    <% award_list.each do |award| %>
       <tr>
         <td><%= award.date %></td>
-        <td><%= award.rank.style.description %></td>
         <td><%= award.rank.name %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</td>
+<% end %>
+</tr>
+</table>
 
+<p>Effective date: <%= @date %>.</p>
 
+<div class='no_print'>
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>
+</div>

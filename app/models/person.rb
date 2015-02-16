@@ -26,6 +26,10 @@ class Person < ActiveRecord::Base
     end
   end
   
+  def all_classes
+    Attendance.where("person_id = :person_id", {person_id: self.id}).sum(:count)
+  end
+
   def all_classes_since(date)
     Attendance.where("person_id = :person_id and date >= :date", {person_id: self.id, date: date}).sum(:count)
   end
@@ -38,7 +42,7 @@ class Person < ActiveRecord::Base
   
   def classes_since_last_promotion(style)
     date_of_last_promotion = last_promotion_date(style) || Date.new(1990,1,1)
-    Attendance.where("person_id = :person_id AND style_id = :style_id and date >= :date", {person_id: self.id, style_id: style.id, date: date_of_last_promotion}).sum(:count)
+    Attendance.where("person_id = :person_id AND style_id = :style_id and date > :date", {person_id: self.id, style_id: style.id, date: date_of_last_promotion}).sum(:count)
   end
   
   def last_promotion_date(style)
@@ -48,6 +52,10 @@ class Person < ActiveRecord::Base
     else
       nil
     end
+  end
+  
+  def first_promotion
+    Award.where({'person': self}).order('awards.date').first
   end
   
   def last_promotion(style)

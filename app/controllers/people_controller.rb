@@ -45,7 +45,25 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.json
   def show
-    @awards = @person.awards.order(:date).reverse_order
+    @date = Date.today
+    @awards = @person.styles.collect do |style_id|
+      style = Style.find(style_id)
+      awards = Award.for_person_and_style(@person, style)
+      if awards.length > 10
+        significant_awards = []
+        for i in 1..awards.length-2
+          if awards[i].rank.test_needed_from(awards[i+1].rank)
+            significant_awards.append(awards[i])
+          end
+        end
+        significant_awards.prepend(awards.first)
+        awards = significant_awards
+      end
+      [style, awards]
+    end
+    @total_classes = @person.all_classes
+    @total_classes_this_year = @person.all_classes_since(@date-1.year)
+    @start_date = @person.first_promotion.date
   end
 
   # GET /people/new
