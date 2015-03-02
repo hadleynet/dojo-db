@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218225641) do
+ActiveRecord::Schema.define(version: 20150302000346) do
 
   create_table "attendances", force: :cascade do |t|
     t.date     "date"
@@ -65,6 +65,17 @@ ActiveRecord::Schema.define(version: 20150218225641) do
     t.integer  "stripe_count"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "day_of_week"
+    t.integer  "style_id"
+    t.integer  "hour"
+    t.integer  "minute"
+    t.boolean  "am"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "styles", force: :cascade do |t|

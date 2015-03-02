@@ -4,3 +4,8 @@ Enter attendance for: <%= form_tag("/attendances/attendance", :method => :get) d
   <%= select_date @date %>
   <%= submit_tag "Submit" %>
 <% end %>
+
+Attendance form for: <%= form_tag("/attendances/form", :method => :get) do %>
+  <%= select_date @date %>
+  <%= submit_tag "Submit" %>
+<% end %>

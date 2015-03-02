@@ -1,10 +1,22 @@
 // Place all the styles related to the Attendances controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+tr:nth-child(even) {background: #DDD}
+tr:nth-child(odd) {background: #FFF}
 @media print {
   // hide form and navigation elements for print
   .navbar, .no_print {
     display: none;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto
+  }
+  
+  td {
+    page-break-inside: avoid;
+    page-break-after: auto
   }
   
   // repeat table header on every printed page
@@ -14,13 +26,14 @@
 
   // add table borders for print version
   table {
+      page-break-after: auto;
       border-collapse: collapse;
       table-layout: fixed;
       width: 100%;
   }
   table, td, th {
-      border: 1px solid black;
-      padding: 10px;
+//      border: 1px solid black;
+      padding: 1px;
   }
 }
 @media screen {

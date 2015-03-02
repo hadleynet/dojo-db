@@ -1,0 +1,17 @@
+<p>
+  <strong>Class:</strong>
+  <%= @session.description %>
+</p>
+
+<p>
+  <strong>Day of week:</strong>
+  <%= Session.day_for(@session.day_of_week) %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @session.time %>
+</p>
+
+<%= link_to 'Edit', edit_session_path(@session) %> |
+<%= link_to 'Back', sessions_path %>

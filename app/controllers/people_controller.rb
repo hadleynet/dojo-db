@@ -31,9 +31,26 @@ class PeopleController < ApplicationController
         }
       ]
     }
-    Attendance.select("strftime('%Y-%m', date) as month, sum(count) as classes").where("person_id=:person AND date>:date", {person: @person.id, date: Date.today-1.year}).group("month").each do |a|
-      @data[:labels].append(a.month)
-      @data[:datasets][0][:data].append(a.classes)
+#     Attendance.select("strftime('%Y-%m', date) as month, sum(count) as classes").where("person_id=:person AND date>:date", {person: @person.id, date: Date.today-1.year}).group("month").each do |a|
+#       @data[:labels].append(a.month)
+#       @data[:datasets][0][:data].append(a.classes)
+#     end
+    
+    attendance = Attendance.select("strftime('%Y-%m', date) as month, sum(count) as classes").where("person_id=:person AND date>:date", {person: @person.id, date: Date.today-14.months}).group("month").to_a
+
+    now = Date.today
+    m = now.month
+    y = now.year-1
+    for i in 1..12 do
+      d = Date.new(y, m)
+      label = d.strftime('%Y-%m')
+      @data[:labels].append(label)
+      @data[:datasets][0][:data].append(get_class_count(attendance, label))
+      m = m+1
+      if m==13
+        m=1
+        y=y+1
+      end
     end
 
     respond_to do |format|
@@ -124,5 +141,13 @@ class PeopleController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
       params.require(:person).permit(:id, :forename, :surname, :birthdate, :active)
+    end
+    
+    def get_class_count(attendance, label)
+      count = 0
+      attendance.each do |a|
+        count = a.classes if a.month==label
+      end
+      count
     end
 end

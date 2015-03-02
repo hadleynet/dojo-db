@@ -6,7 +6,9 @@ class ReportsController < ApplicationController
 
   # GET /reports/promotions_due
   def promotions_due
-    styles = Style.active
+#    styles = Style.active
+    @date = Date.today
+    styles = [Style.shorin_ryu]
     @promotable_without_test_by_style = styles.map do |style|
       [style, Person.all_promotable(style, Test::None, Test::Informal)]
     end
@@ -38,6 +40,7 @@ class ReportsController < ApplicationController
   
   def attendance
     periods = [6, 3, 1]
+    @date = Date.today
     @attendance = Person.active.collect do |person|
       [person, periods.collect {|period| person.all_classes_since(Date.today-period.months)}]
     end

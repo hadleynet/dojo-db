@@ -17,9 +17,16 @@ class AttendancesController < ApplicationController
     end
   end
   
+  # GET /attendances/form
+  def form
+    @people = Person.active
+    @date = params[:date] ? Date.new(params[:date][:year].to_i, params[:date][:month].to_i, params[:date][:day].to_i) : Date.today
+    @sessions = Session.for_day(@date.cwday)
+  end
+  
   def add
     date = Date.parse(params["date"])
-    Style.all.each do |style|
+    Style.active.each do |style|
       params["attendance_#{style.id}"].each do |attendance|
         count = attendance["count"].to_i
         a = Attendance.where(date: date, person_id: attendance["person"], style: style).first_or_initialize

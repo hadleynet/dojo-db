@@ -1,0 +1,32 @@
+<h1 class="no_print">Attendance for <%= @date.strftime('%A, %B %d, %Y') %></h1>
+
+<table>
+<thead>
+  <tr class="print_only">
+    <th colspan="<%= 1+@sessions.length %>">Attendance for <%= @date.strftime('%A, %B %d, %Y') %></th>
+  <tr>
+    <th>Name</th>
+    <% @sessions.each do |session| %>
+    <th><%= session.time %><br><%= session.description %></th>
+    <% end %>
+  </tr>
+</thead>
+<tbody>
+<% @people.each do |person| %>
+  <tr>
+    <td><b><%= person.display_name %><b></td>
+    <% @sessions.each do |session| %>
+    <td align='center'><%= check_box_tag(:foo) %></td>
+    <% end %>
+  </tr>
+<% end %>
+<% 3.times do %>
+  <tr>
+    <td></td>
+    <% @sessions.each do |session| %>
+    <td align='center'><%= check_box_tag(:foo) %></td>
+    <% end %>
+  </tr>
+<% end %>
+</tbody>
+</table>

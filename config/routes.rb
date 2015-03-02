@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :sessions
+
   devise_for :users
   as :user do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
@@ -32,6 +34,7 @@ Rails.application.routes.draw do
   
   get 'attendances' => 'attendances#index'
   get 'attendances/attendance' => 'attendances#attendance'
+  get 'attendances/form' => 'attendances#form'
   post 'attendances/add' => 'attendances#add'
 
   # The priority is based upon order of creation: first created -> highest priority.

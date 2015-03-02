@@ -1,4 +1,4 @@
-<h1>Attendance</h1>
+<h1>Attendance History as of <%= @date %></h1>
 
 <table border="1">
   <thead>
@@ -13,7 +13,7 @@
   <tbody>
     <% @attendance.each do |person_and_attendance| %>
       <% person, classes = person_and_attendance %>
-      <tr>
+      <tr class="<%= "highlight" if classes[2]==0 %>">
         <td><%= person.display_name %></td>
         <td><%= classes[0] %></td>
         <td><%= classes[1] %></td>

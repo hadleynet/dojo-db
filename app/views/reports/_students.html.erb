@@ -15,7 +15,7 @@
     <% promotable.each do |person| %>
       <% last_promotion = person.last_promotion(style) %>
       <% rank = last_promotion ? last_promotion.rank : style.ranks.first %>
-      <tr>
+      <tr class="<%= 'highlight' if rank.next_rank_test.description=='Informal' %>">
         <td><%= person.display_name %></td>
         <td><%= rank.name %></td>
         <td><%= last_promotion ? last_promotion.date : "None" %></td>
