@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 tr:nth-child(even) {background: #DDD}
 tr:nth-child(odd) {background: #FFF}
+
 @media print {
   // hide form and navigation elements for print
   .navbar, .no_print {
@@ -32,12 +33,29 @@ tr:nth-child(odd) {background: #FFF}
       width: 100%;
   }
   table, td, th {
-//      border: 1px solid black;
       padding: 1px;
   }
+  
+  a {
+    text-decoration: none;
+    color: #000;
+  }
 }
+
 @media screen {
   .print_only {
     display: none;
   }
+  
+  a {
+    color: #000;
+    &:visited {
+      color: #666;
+    }
+    &:hover {
+      color: #fff;
+      background-color: #000;
+    }
+  }
+
 }

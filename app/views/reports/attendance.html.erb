@@ -1,9 +1,12 @@
-<h1>Attendance History as of <%= @date %></h1>
+<h1 class="no_print">Attendance History as of <%= @date %></h1>
 
-<table border="1">
+<table>
   <thead>
+    <tr class="print_only">
+      <th colspan="4">Attendance History as of <%= @date %></th>
+    </tr>
     <tr>
-      <th>Name</th>
+      <th align="left">Name</th>
       <th>6 months</th>
       <th>3 months</th>
       <th>1 month</th>
@@ -14,10 +17,20 @@
     <% @attendance.each do |person_and_attendance| %>
       <% person, classes = person_and_attendance %>
       <tr class="<%= "highlight" if classes[2]==0 %>">
-        <td><%= person.display_name %></td>
-        <td><%= classes[0] %></td>
-        <td><%= classes[1] %></td>
-        <td><%= classes[2] %></td>
+        <td>
+          <%= link_to person.display_name, person %>
+        </td>
+        <td align='center'><%= classes[0] %></td>
+        <td align='center'><%= classes[1] %></td>
+        <td align='center'>
+        <% if classes[2]==0 %>
+          <a href="mailto:<%= "no-one@snai1mai1.com?subject=Long%20time,%20no%20see&body=Hey%20#{person.forename}%2C%0A%0AWe%20haven%27t%20see%20you%20at%20the%20svkc%20in%20awhile%20hope%20all%20is%20well%20and%20we%20see%20you%20soon.....%0A%0AJoe" %>">
+        <% end %>
+          <%= classes[2] %>
+        <% if classes[2]==0 %>
+          </a>
+        <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

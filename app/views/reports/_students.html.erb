@@ -1,13 +1,13 @@
-<table border="1" width="100%">
+<table width="100%">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Rank</th>
-      <th>Date</th>
-      <th>Classes</th>
-      <th>Required</th>
-      <th>Test</th>
-      <th>Next Rank</th>
+      <th align="left">Name</th>
+      <th align="left">Rank</th>
+      <th align="center">Date</th>
+      <th align="center">Classes</th>
+      <th align="center">Required</th>
+      <th align="center">Test</th>
+      <th align="left">Next Rank</th>
     </tr>
   </thead>
 
@@ -16,13 +16,13 @@
       <% last_promotion = person.last_promotion(style) %>
       <% rank = last_promotion ? last_promotion.rank : style.ranks.first %>
       <tr class="<%= 'highlight' if rank.next_rank_test.description=='Informal' %>">
-        <td><%= person.display_name %></td>
-        <td><%= rank.name %></td>
-        <td><%= last_promotion ? last_promotion.date : "None" %></td>
-        <td><%= person.classes_since_last_promotion(style) %></td>
-        <td><%= rank.class_delta %></td>
-        <td><%= rank.next_rank_test.description %></td>
-        <td><%= rank.next_rank ? rank.next_rank.name : "TBD" %></td>
+        <td align="left"><b><%= person.display_name %></b></td>
+        <td align="left"><%= rank.name %></td>
+        <td align="center"><%= last_promotion ? last_promotion.date : "None" %></td>
+        <td align="center"><%= person.classes_since_last_promotion(style) %></td>
+        <td align="center"><%= rank.class_delta %></td>
+        <td align="center"><%= rank.next_rank_test.description %></td>
+        <td align="left"><b><%= rank.next_rank ? rank.next_rank.name : "TBD" %></b></td>
       </tr>
     <% end %>
   </tbody>
