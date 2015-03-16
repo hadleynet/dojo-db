@@ -16,9 +16,9 @@
         <td><%= session.style.description %> (<%= session.name %>)</td>
         <td><%= Session.day_for(session.day_of_week) %></td>
         <td><%= session.hour %>:<%= "%02d" % session.minute %> <%= session.am ? "AM" : "PM" %></td>
-        <td><%= link_to 'Show', session %></td>
-        <td><%= link_to 'Edit', edit_session_path(session) %></td>
-        <td><%= link_to 'Destroy', session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', karate_session_path(session) %></td>
+        <td><%= link_to 'Edit', edit_karate_session_path(session) %></td>
+        <td><%= link_to 'Destroy', karate_session_path(session), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Session', new_session_path %>
+<%= link_to 'New Session', new_karate_session_path %>

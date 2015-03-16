@@ -31,10 +31,6 @@ class PeopleController < ApplicationController
         }
       ]
     }
-#     Attendance.select("strftime('%Y-%m', date) as month, sum(count) as classes").where("person_id=:person AND date>:date", {person: @person.id, date: Date.today-1.year}).group("month").each do |a|
-#       @data[:labels].append(a.month)
-#       @data[:datasets][0][:data].append(a.classes)
-#     end
     
     attendance = Attendance.select("strftime('%Y-%m', date) as month, sum(count) as classes").where("person_id=:person AND date>:date", {person: @person.id, date: Date.today-14.months}).group("month").to_a
 
@@ -80,7 +76,7 @@ class PeopleController < ApplicationController
     end
     @total_classes = @person.all_classes
     @total_classes_this_year = @person.all_classes_since(@date-1.year)
-    @start_date = @person.first_promotion.date
+    @start_date = @person.first_promotion ? @person.first_promotion.date : Date.today
   end
 
   # GET /people/new
