@@ -25,7 +25,7 @@ class Rank < ActiveRecord::Base
     test_needed = false
     r = self.prev_rank
     while r do
-      if r.next_rank_test != Test::None
+      if r.next_rank_test != Test.none
         test_needed = true
         break
       end

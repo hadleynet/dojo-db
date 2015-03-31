@@ -1,27 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 
-  style_id: 
+  id: 1
+  style_id: 1
   name: MyString
   translation: MyString
-  order: 
+  order: 1
   active: false
-  class_delta: 
-  next_rank_test: 
-  belt_color: 
-  stripe_color: 
-  stripe_count: 
+  class_delta: 5
+  next_rank_test: 1
+  belt_color: 2
+  stripe_color: 1
+  stripe_count: 0
 
 two:
-  id: 
-  style_id: 
+  id: 2
+  style_id: 1
   name: MyString
   translation: MyString
-  order: 
+  order: 2
   active: false
-  class_delta: 
-  next_rank_test: 
-  belt_color: 
-  stripe_color: 
-  stripe_count: 
+  class_delta: 5
+  next_rank_test: 1
+  belt_color: 3
+  stripe_color: 1
+  stripe_count: 0

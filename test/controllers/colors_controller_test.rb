@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class ColorsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
-    @color = colors(:one)
+    @color = colors(:purple)
+    @user = User.find_by(email: 'foo@bar.org')
+    sign_in @user
   end
 
   test "should get index" do
@@ -18,10 +22,9 @@ class ColorsControllerTest < ActionController::TestCase
 
   test "should create color" do
     assert_difference('Color.count') do
-      post :create, color: { id: @color.id, description: @color.description }
+      post :create, color: { description: @color.description }
     end
-
-    assert_redirected_to color_path(assigns(:color))
+    assert_redirected_to colors_path()
   end
 
   test "should show color" do
@@ -35,15 +38,16 @@ class ColorsControllerTest < ActionController::TestCase
   end
 
   test "should update color" do
-    patch :update, id: @color, color: { id: @color.id, description: @color.description }
-    assert_redirected_to color_path(assigns(:color))
+    patch :update, id: @color, color: { id: @color.id, description: "New" }
+    assert_redirected_to colors_path()
+    updated = Color.find(@color.id)
+    assert_equal("New", updated.description)
   end
 
   test "should destroy color" do
     assert_difference('Color.count', -1) do
       delete :destroy, id: @color
     end
-
     assert_redirected_to colors_path
   end
 end

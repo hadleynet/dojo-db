@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
     @date = Date.today
     styles = [Style.shorin_ryu]
     @promotable_without_test_by_style = styles.map do |style|
-      [style, Person.all_promotable(style, Test::None, Test::Informal)]
+      [style, Person.all_promotable(style, Test.none, Test.informal)]
     end
   end
 
@@ -18,7 +18,7 @@ class ReportsController < ApplicationController
   def tests_due
     styles = Style.active
     @promotable_with_test_by_style = styles.map do |style|
-      [style, Person.all_promotable(style, Test::Formal)]
+      [style, Person.all_promotable(style, Test.formal)]
     end
   end
 
@@ -33,7 +33,7 @@ class ReportsController < ApplicationController
         rank: rank,
         prev_rank: prev_rank,
         cert: rank.test_needed_from(prev_rank),
-        belt: (prev_rank==nil && rank.belt_color!=Color::White) || (prev_rank && rank.belt_color != prev_rank.belt_color)
+        belt: (prev_rank==nil && rank.belt_color!=Color.white) || (prev_rank && rank.belt_color != prev_rank.belt_color)
       }
     end
   end

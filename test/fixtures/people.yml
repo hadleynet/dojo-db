@@ -2,14 +2,14 @@
 
 one:
   id: 1
-  forename: MyString
-  surname: MyString
+  forename: Fred
+  surname: Flintstone
   birthdate: 2015-01-22
-  active: false
+  active: true
 
 two:
-  id: 1
-  forename: MyString
-  surname: MyString
+  id: 2
+  forename: Barney
+  surname: Rubble
   birthdate: 2015-01-22
-  active: false
+  active: true

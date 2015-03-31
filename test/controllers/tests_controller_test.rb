@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class TestsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
-    @test = tests(:one)
+    @test = tests(:none)
+    @user = User.find_by(email: 'foo@bar.org')
+    sign_in @user
   end
 
   test "should get index" do
@@ -18,7 +22,7 @@ class TestsControllerTest < ActionController::TestCase
 
   test "should create test" do
     assert_difference('Test.count') do
-      post :create, test: { description: @test.description, id: @test.id }
+      post :create, test: { description: @test.description }
     end
 
     assert_redirected_to test_path(assigns(:test))

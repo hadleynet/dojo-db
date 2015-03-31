@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class AwardsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @award = awards(:one)
+    @user = User.find_by(email: 'foo@bar.org')
+    sign_in @user
   end
 
   test "should get index" do

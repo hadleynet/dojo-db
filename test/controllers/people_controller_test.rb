@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class PeopleControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @person = people(:one)
+    @user = User.find_by(email: 'foo@bar.org')
+    sign_in @user
   end
 
   test "should get index" do
@@ -18,7 +22,7 @@ class PeopleControllerTest < ActionController::TestCase
 
   test "should create person" do
     assert_difference('Person.count') do
-      post :create, person: { active: @person.active, birthdate: @person.birthdate, forename: @person.forename, id: @person.id, surname: @person.surname }
+      post :create, person: { active: @person.active, birthdate: @person.birthdate, forename: @person.forename, surname: @person.surname }
     end
 
     assert_redirected_to person_path(assigns(:person))
@@ -39,11 +43,4 @@ class PeopleControllerTest < ActionController::TestCase
     assert_redirected_to person_path(assigns(:person))
   end
 
-  test "should destroy person" do
-    assert_difference('Person.count', -1) do
-      delete :destroy, id: @person
-    end
-
-    assert_redirected_to people_path
-  end
 end

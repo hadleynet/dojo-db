@@ -1,14 +1,18 @@
 require 'test_helper'
 
 class RanksControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
-    @rank = ranks(:one)
+    @rank = ranks(:two)
+    @user = User.find_by(email: 'foo@bar.org')
+    sign_in @user
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:ranks)
+    assert_not_nil assigns(:ranks_by_style)
   end
 
   test "should get new" do
@@ -18,10 +22,10 @@ class RanksControllerTest < ActionController::TestCase
 
   test "should create rank" do
     assert_difference('Rank.count') do
-      post :create, rank: { active: @rank.active, belt_color: @rank.belt_color, class_delta: @rank.class_delta, id: @rank.id, name: @rank.name, next_rank_test: @rank.next_rank_test, order: @rank.order, stripe_color: @rank.stripe_color, stripe_count: @rank.stripe_count, translation: @rank.translation }
+      post :create, rank: { active: @rank.active, belt_color: @rank.belt_color, class_delta: @rank.class_delta, name: @rank.name, next_rank_test: @rank.next_rank_test, order: @rank.order, stripe_color: @rank.stripe_color, stripe_count: @rank.stripe_count, translation: @rank.translation }
     end
 
-    assert_redirected_to rank_path(assigns(:rank))
+    assert_redirected_to ranks_path()
   end
 
   test "should show rank" do
@@ -36,7 +40,7 @@ class RanksControllerTest < ActionController::TestCase
 
   test "should update rank" do
     patch :update, id: @rank, rank: { active: @rank.active, belt_color: @rank.belt_color, class_delta: @rank.class_delta, id: @rank.id, name: @rank.name, next_rank_test: @rank.next_rank_test, order: @rank.order, stripe_color: @rank.stripe_color, stripe_count: @rank.stripe_count, translation: @rank.translation }
-    assert_redirected_to rank_path(assigns(:rank))
+    assert_redirected_to ranks_path()
   end
 
   test "should destroy rank" do

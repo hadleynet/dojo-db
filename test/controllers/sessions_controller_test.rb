@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @session = sessions(:one)
+    @user = User.find_by(email: 'foo@bar.org')
+    sign_in @user
   end
 
   test "should get index" do
@@ -21,7 +25,7 @@ class SessionsControllerTest < ActionController::TestCase
       post :create, session: { am: @session.am, day_of_week: @session.day_of_week, hour: @session.hour, minute: @session.minute, name: @session.name, style_id: @session.style_id }
     end
 
-    assert_redirected_to session_path(assigns(:session))
+    assert_redirected_to karate_session_path(assigns(:session))
   end
 
   test "should show session" do
@@ -36,7 +40,7 @@ class SessionsControllerTest < ActionController::TestCase
 
   test "should update session" do
     patch :update, id: @session, session: { am: @session.am, day_of_week: @session.day_of_week, hour: @session.hour, minute: @session.minute, name: @session.name, style_id: @session.style_id }
-    assert_redirected_to session_path(assigns(:session))
+    assert_redirected_to karate_session_path(assigns(:session))
   end
 
   test "should destroy session" do
@@ -44,6 +48,6 @@ class SessionsControllerTest < ActionController::TestCase
       delete :destroy, id: @session
     end
 
-    assert_redirected_to sessions_path
+    assert_redirected_to karate_sessions_path
   end
 end

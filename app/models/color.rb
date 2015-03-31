@@ -3,7 +3,9 @@ class Color < ActiveRecord::Base
   has_many :stripes, class_name: "Rank", foreign_key: "stripe_color_id"
   before_destroy :check_for_belts
 
-  White = self.find(2)
+  def self.white
+     self.find_by(description: "White") || self.find_by(description: "white")
+  end
 
   def check_for_belts
     status = true

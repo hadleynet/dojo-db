@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class StylesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
-    @style = styles(:one)
+    @style = styles(:goju)
+    @user = User.find_by(email: 'foo@bar.org')
+    sign_in @user
   end
 
   test "should get index" do
@@ -18,7 +22,7 @@ class StylesControllerTest < ActionController::TestCase
 
   test "should create style" do
     assert_difference('Style.count') do
-      post :create, style: { description: @style.description, id: @style.id }
+      post :create, style: { description: @style.description }
     end
 
     assert_redirected_to style_path(assigns(:style))
