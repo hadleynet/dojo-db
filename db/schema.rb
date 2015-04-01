@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150302000346) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "attendances", force: :cascade do |t|
     t.date     "date"
     t.integer  "person_id"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150302000346) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "attendances", ["date"], name: "index_attendances_on_date"
+  add_index "attendances", ["date"], name: "index_attendances_on_date", using: :btree
 
   create_table "awards", force: :cascade do |t|
     t.date     "date"
@@ -32,8 +35,8 @@ ActiveRecord::Schema.define(version: 20150302000346) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "awards", ["date"], name: "index_awards_on_date"
-  add_index "awards", ["person_id"], name: "index_awards_on_person_id"
+  add_index "awards", ["date"], name: "index_awards_on_date", using: :btree
+  add_index "awards", ["person_id"], name: "index_awards_on_person_id", using: :btree
 
   create_table "colors", force: :cascade do |t|
     t.string   "description"
@@ -50,7 +53,7 @@ ActiveRecord::Schema.define(version: 20150302000346) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "people", ["active"], name: "index_people_on_active"
+  add_index "people", ["active"], name: "index_people_on_active", using: :btree
 
   create_table "ranks", force: :cascade do |t|
     t.integer  "style_id"
@@ -107,7 +110,7 @@ ActiveRecord::Schema.define(version: 20150302000346) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

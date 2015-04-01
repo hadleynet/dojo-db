@@ -32,7 +32,10 @@ class PeopleController < ApplicationController
       ]
     }
     
-    attendance = Attendance.select("strftime('%Y-%m', date) as month, sum(count) as classes").where("person_id=:person AND date>:date", {person: @person.id, date: Date.today-14.months}).group("month").to_a
+    # for SQLite3
+#     attendance = Attendance.select("strftime('%Y-%m', date) as month, sum(count) as classes").where("person_id=:person AND date>:date", {person: @person.id, date: Date.today-14.months}).group("month").to_a
+    # for Postgres
+    attendance = Attendance.select("to_char(date, 'YYYY-MM') as month, sum(count) as classes").where("person_id=:person AND date>:date", {person: @person.id, date: Date.today-14.months}).group("month").to_a
 
     now = Date.today
     m = now.month
