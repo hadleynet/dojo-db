@@ -5,6 +5,10 @@ default: &default
   username: dojo
   password:
 
+production:
+  <<: *default
+  database: dojo_production
+
 development:
   <<: *default
   database: dojo_development
@@ -24,7 +28,7 @@ test:
 #test:
 #  <<: *default
 #  database: db/test.sqlite3
-
-production:
-  <<: *default
-  database: db/production.sqlite3
+#
+#production:
+#  <<: *default
+#  database: db/production.sqlite3
