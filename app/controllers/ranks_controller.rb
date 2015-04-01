@@ -1,5 +1,6 @@
 class RanksController < ApplicationController
   before_action :set_rank, only: [:show, :edit, :update, :destroy]
+  before_action :verify_is_admin, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /ranks
   # GET /ranks.json

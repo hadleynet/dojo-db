@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :set_session, only: [:show, :edit, :update, :destroy]
+  before_action :verify_is_admin, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /sessions
   # GET /sessions.json

@@ -4,7 +4,9 @@
   <thead>
     <tr>
       <th>Description</th>
+      <% if is_admin? %>
       <th colspan="2"></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -12,8 +14,10 @@
     <% @colors.each do |color| %>
       <tr>
         <td><%= color.description %></td>
+        <% if is_admin? %>
         <td><%= link_to 'Edit', edit_color_path(color) %></td>
         <td><%= link_to 'Destroy', color, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -21,4 +25,6 @@
 
 <br>
 
+<% if is_admin? %>
 <%= link_to 'New Color', new_color_path %>
+<% end %>

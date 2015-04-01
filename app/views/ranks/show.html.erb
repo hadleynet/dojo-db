@@ -53,5 +53,7 @@
   <%= @rank.stripe_count %>
 </p>
 
+<% if is_admin? %>
 <%= link_to 'Edit', edit_rank_path(@rank) %> |
+<% end %>
 <%= link_to 'Back', ranks_path %>

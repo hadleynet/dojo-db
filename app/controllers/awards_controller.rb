@@ -1,5 +1,6 @@
 class AwardsController < ApplicationController
   before_action :set_award, only: [:show, :edit, :update, :destroy]
+  before_action :verify_is_admin, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /awards
   # GET /awards.json

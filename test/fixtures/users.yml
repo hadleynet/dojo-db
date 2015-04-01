@@ -5,6 +5,7 @@
 #
 one:
   email: foo@bar.org
+  admin: true
 
 two:
   email: bar@baz.com

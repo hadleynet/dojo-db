@@ -1,4 +1,5 @@
 class AttendancesController < ApplicationController
+  before_action :verify_is_admin, only: [:attendance, :add]
 
   # GET /attendances
   def index

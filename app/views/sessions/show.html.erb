@@ -13,5 +13,7 @@
   <%= @session.time %>
 </p>
 
+<% if is_admin? %>
 <%= link_to 'Edit', edit_karate_session_path(@session) %> |
+<% end %>
 <%= link_to 'Back', karate_sessions_path %>

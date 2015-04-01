@@ -12,7 +12,11 @@
       <th>Surname</th>
       <th>Birthdate</th>
       <th>Active</th>
+      <% if is_admin? %>
       <th colspan="2"></th>
+      <% else %>
+      <th></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -25,13 +29,17 @@
         <td><%= person.birthdate %></td>
         <td><%= person.active ? 'Y' : 'N' %></td>
         <td><%= link_to 'Show', person %></td>
+        <% if is_admin? %>
         <td><%= link_to 'Edit', edit_person_path(person) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<% if is_admin? %>
 <div class="no_print"><%= link_to 'New Person', new_person_path %></div>
+<% end %>
 <p>
 <div class="no_print">
 <%= form_tag("/people/search", method: "get") do %>

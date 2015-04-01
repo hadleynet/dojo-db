@@ -3,5 +3,7 @@
   <%= @color.description %>
 </p>
 
+<% if is_admin? %> 
 <%= link_to 'Edit', edit_color_path(@color) %> |
+<% end %>
 <%= link_to 'Back', colors_path %>

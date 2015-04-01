@@ -7,7 +7,9 @@
       <th>Person</th>
       <th>Style</th>
       <th>Rank</th>
+      <% if is_admin? %>
       <th colspan="2"></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -18,13 +20,16 @@
         <td><%= award.person.forename %> <%= award.person.surname %></td>
         <td><%= award.rank.style.description %></td>
         <td><%= award.rank.name %></td>
+        <% if is_admin? %>
         <td><%= link_to 'Edit', edit_award_path(award) %></td>
         <td><%= link_to 'Destroy', award, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<% if is_admin? %>
 <br>
-
 <%= link_to 'New Award', new_award_path %>
+<% end %>

@@ -17,7 +17,9 @@
       <th>Belt color</th>
       <th>Stripe color</th>
       <th>Stripe count</th>
+      <% if is_admin? %>
       <th colspan="2"></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -33,8 +35,10 @@
         <td><%= rank.belt_color.description %></td>
         <td><%= rank.stripe_color.description %></td>
         <td><%= rank.stripe_count %></td>
+        <% if is_admin? %>
         <td><%= link_to 'Edit', edit_rank_path(rank) %></td>
         <td><%= link_to 'Destroy', rank, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -43,7 +47,8 @@
 <% end %>
 <% end %>
 
-
+<% if is_admin? %>
 <br>
 
 <%= link_to 'New Rank', new_rank_path %>
+<% end %>

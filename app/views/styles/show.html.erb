@@ -8,5 +8,7 @@
   <%= @style.description %>
 </p>
 
+<% if is_admin? %>
 <%= link_to 'Edit', edit_style_path(@style) %> |
+<% end %>
 <%= link_to 'Back', styles_path %>
