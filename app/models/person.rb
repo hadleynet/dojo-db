@@ -17,7 +17,10 @@ class Person < ActiveRecord::Base
   
   def self.search(search)
     search_condition = "%" + search + "%"
-    Person.where('forename LIKE :name OR surname LIKE :name', {name: search_condition})
+    # SQLite3
+    #Person.where('forename LIKE :name OR surname LIKE :name', {name: search_condition})
+    # Postgres
+    Person.where('forename ILIKE :name OR surname ILIKE :name', {name: search_condition})
   end
   
   def self.all_promotable(style, *test_levels)
