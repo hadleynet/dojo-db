@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :day_of_week %><br>
-    <%= select_tag("session[day_of_week]", options_for_select(Session.days_with_index)) %>
+    <%= select_tag("session[day_of_week]", options_for_select(Session.days_with_index, @session.day_of_week)) %>
   </div>
   <div class="field">
     <%= f.label :hour %><br>
@@ -34,6 +34,10 @@
   <div class="field">
     <%= f.label :am %><br>
     <%= f.check_box :am %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br>
+    <%= f.check_box :active %>
   </div>
   <div class="actions">
     <%= f.submit %>

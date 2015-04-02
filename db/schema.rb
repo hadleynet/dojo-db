@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401181031) do
+ActiveRecord::Schema.define(version: 20150402201520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150401181031) do
     t.integer  "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "session_id"
   end
 
   add_index "attendances", ["date"], name: "index_attendances_on_date", using: :btree
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150401181031) do
     t.boolean  "am"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.boolean  "active"
   end
 
   create_table "styles", force: :cascade do |t|

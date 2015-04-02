@@ -6,6 +6,7 @@
       <th>Class</th>
       <th>Day of week</th>
       <th>Time</th>
+      <th>Active</th>
       <% if is_admin? %>
       <th colspan="2"></th>
       <% end %>
@@ -18,6 +19,7 @@
         <td><%= session.style.description %> (<%= session.name %>)</td>
         <td><%= Session.day_for(session.day_of_week) %></td>
         <td><%= session.hour %>:<%= "%02d" % session.minute %> <%= session.am ? "AM" : "PM" %></td>
+        <td><%= session.active ? 'Y' : 'N' %></td>
         <% if is_admin? %>
         <td><%= link_to 'Edit', edit_karate_session_path(session) %></td>
         <td><%= link_to 'Destroy', karate_session_path(session), method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -12,6 +12,10 @@
   <strong>Time:</strong>
   <%= @session.time %>
 </p>
+<p>
+  <strong>Active:</strong>
+  <%= @session.active ? 'Y' : 'N' %>
+</p>
 
 <% if is_admin? %>
 <%= link_to 'Edit', edit_karate_session_path(@session) %> |
