@@ -1,5 +1,5 @@
 class AttendancesController < ApplicationController
-  before_action :verify_is_admin, only: [:attendance, :add]
+  before_action :verify_is_admin, only: [:attendance, :add, :add_by_session]
 
   # GET /attendances
   def index

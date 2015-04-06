@@ -35,5 +35,7 @@
     <% end %>
     </tbody>
   </table>
+  <% if is_admin? %>
   <%= submit_tag "Save", :class => 'no_print' %>
+  <% end %>
 <% end %>
