@@ -33,9 +33,9 @@ Rails.application.routes.draw do
   get 'reports/attendance' => 'reports#attendance'
   
   get 'attendances' => 'attendances#index'
-  get 'attendances/attendance' => 'attendances#attendance'
   get 'attendances/form' => 'attendances#form'
   post 'attendances/add' => 'attendances#add'
+  post 'attendances/add_by_session' => 'attendances#add_by_session'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

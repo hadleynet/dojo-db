@@ -19,8 +19,4 @@ class AttendancesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get attendances" do
-    get :attendance
-    assert_response :success
-  end
 end

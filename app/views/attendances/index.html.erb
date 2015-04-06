@@ -1,12 +1,5 @@
 <h1>Classes</h1>
 
-<% if is_admin? %>
-<p>Enter attendance for: <%= form_tag("/attendances/attendance", :method => :get) do %>
-  <%= select_date @date %>
-  <%= submit_tag "Submit" %>
-<% end %></p>
-<% end %>
-
 <p>Attendance form for: <%= form_tag("/attendances/form", :method => :get) do %>
   <%= select_date @date %>
   <%= submit_tag "Submit" %>
