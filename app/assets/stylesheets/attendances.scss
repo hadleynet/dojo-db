@@ -6,7 +6,7 @@ tr:nth-child(odd) {background: #FFF}
 
 @media print {
   // hide form and navigation elements for print
-  .navbar, .no_print {
+  .navigation, .nav, .no_print {
     display: none;
   }
 

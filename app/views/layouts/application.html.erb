@@ -7,22 +7,70 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="navbar"><a href="/attendances">Attendance</a> | <a href="/people">Students</a> | <a href="/awards">Promotions</a> | <a href="/ranks">Ranks</a> | <a href="/reports">Reports</a> |
-<% if user_signed_in? %>
-  <%= current_user.email %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
-<hr/>
-</div>
+  <script>
+  $( document ).ready(
+    function () {
+      /* Handle hovering effect and submenu appearing */
+      $('.nav li').hover(
+        function () { //appearing on hover
+          $('ul', this).fadeIn();
+        },
+        function () { //disappearing on hover
+          $('ul', this).fadeOut();
+        }
+      );
+    }
+  );
+  </script>
 
+  <div class="navigation">
+    <ul class="nav">
+      <li>
+        <a href="#">Administration</a>
+        <ul>
+          <li><a href="<%= attendances_path %>">Attendance</a></li>
+          <li><a href="<%= people_path %>">Students</a></li>
+          <li><a href="<%= awards_path %>">Awards</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Reports</a>
+        <ul>
+          <li><a href="<%= reports_promotions_due_path %>">Promotion Eligibility</a></li>
+          <li><a href="<%= reports_tests_due_path %>">Test Eligibility</a></li>
+          <li><a href="<%= reports_recent_promotions_path %>">Recent promotions</a></li>
+          <li><a href="<%= reports_attendance_path %>">Attendance</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Configuration</a>
+        <ul>
+          <li><a href="<%= karate_sessions_path %>">Sessions</a>
+          <li><a href="<%= ranks_path %>">Ranks</a></li>
+          <li><a href="<%= styles_path %>">Styles</a></li>
+          <li><a href="<%= colors_path %>">Colors</a></li>
+          <li><a href="<%= tests_path %>">Tests</a></li>
+        </ul>
+      </li>
+      <li>
+      <% if user_signed_in? %>
+        <a href="#"><%= current_user.email %></a>
+        <ul>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+      <% end %>
+      </li>
+    </ul>
+  </div>
+  
 <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
 <% end %>
 <% if alert %>
   <p class="alert alert-danger"><%= alert %></p>
-<% end %>       
+<% end %>     
+  
 <%= yield %>
 
 </body>
