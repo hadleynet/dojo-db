@@ -23,7 +23,7 @@ class Session < ActiveRecord::Base
   end
   
   def self.for_day(day_of_week)
-    Session.where(day_of_week: day_of_week, active: true).order(:am, :hour, :minute) 
+    Session.where(day_of_week: day_of_week, active: true).order(style_id: :desc, am: :asc, hour: :asc, minute: :asc) 
   end
   
   def description
