@@ -1,0 +1,30 @@
+<h1 class="no_print">Active Students as of <%= @date.to_formatted_s(:us) %></h1>
+
+<table border="1">
+  <thead>
+    <tr class="print_only">
+      <th colspan="<%= 2+@styles.length %>">Active Students as of <%= @date.to_formatted_s(:us) %></th>
+    </tr>
+    <tr>
+      <th align="left">Name</th>
+      <th>Classes (3 Months)</th>
+      <% @styles.each do |style| %>
+      <th><%= style.description %></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td>
+          <%= link_to person[:person].display_name, person[:person] %>
+        </td>
+        <td align='center'><%= person[:classes_in_last_three_months] %></td>
+        <% person[:latest_awards].each do |award| %>
+          <td><%= award ? "#{award.rank.name} (#{award.date.to_formatted_s(:us)})" : "" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

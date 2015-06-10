@@ -45,4 +45,16 @@ class ReportsController < ApplicationController
       [person, periods.collect {|period| person.all_classes_since(Date.today-period.months)}]
     end
   end
+  
+  def active_students
+    @date = Date.today
+    @styles = Style.active
+    @people = Person.active.collect do |person|
+      {
+        person: person,
+        classes_in_last_three_months: person.all_classes_since(@date-3.months),
+        latest_awards: @styles.collect {|style| person.last_promotion(style)}
+      }
+    end
+  end
 end

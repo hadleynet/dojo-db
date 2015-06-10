@@ -62,7 +62,7 @@ class Person < ActiveRecord::Base
   end
   
   def last_promotion(style)
-    Award.joins(:rank).where({'awards.person': self, 'ranks.style': style}).order('awards.date').last
+    Award.joins(:rank).where({'awards.person': self, 'ranks.style': style}).order('awards.date', "ranks.order").last
   end
   
   def rank_prior_to(award)
