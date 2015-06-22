@@ -66,7 +66,7 @@ class Person < ActiveRecord::Base
   end
   
   def rank_prior_to(award)
-    prior_award_for_style = Award.joins(:rank).where("awards.date < :date AND awards.person_id = :person_id AND ranks.style_id = :style_id", {person_id: self.id, style_id: award.rank.style_id, date: award.date}).order('awards.date').last
+    prior_award_for_style = Award.joins(:rank).where("awards.date < :date AND awards.person_id = :person_id AND ranks.style_id = :style_id", {person_id: self.id, style_id: award.rank.style_id, date: award.date}).order('awards.date', 'ranks.order').last
     prior_award_for_style ? prior_award_for_style.rank : nil
   end
 end
