@@ -1,0 +1,6 @@
+<h1>Promotions</h1>
+
+<p>Select month: <%= form_tag("/reports/promotions_by_date", :method => :get) do %>
+  <%= select_date @date, order: [:year, :month] %>
+  <%= submit_tag "Submit" %>
+<% end %></p>

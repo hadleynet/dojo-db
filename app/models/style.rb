@@ -10,4 +10,8 @@ class Style < ActiveRecord::Base
   def self.shorin_ryu
     Style.find(2)
   end
+
+  def self.teaching
+    Style.find(4)
+  end
 end

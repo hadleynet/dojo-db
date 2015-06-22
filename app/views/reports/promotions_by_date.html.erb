@@ -1,0 +1,33 @@
+
+<!-- cut here -->
+
+<% [ %>
+  <% {type: "Full Rank", promotions: @full_rank_promotions}, %>
+  <% {type: "Stripe", promotions: @stripe_promotions}, %>
+  <% {type: "Teaching", promotions: @teaching_promotions} %>
+<% ].each do |set| %>
+
+  <h1><%= set[:type] %> Promotions For <%= @date.strftime('%B %Y') %></h1>
+  <% if set[:promotions].length > 0 %>
+  <table border="1">
+    <tr> 
+      <th>Date</th>
+      <th>Karateka</th>
+      <th>Rank</th>
+      <th>Style</th>
+    </tr>
+    <% set[:promotions].each do |p| %> 
+    <tr>
+      <td><%= p.date.strftime('%b %d, %y') %></td>
+      <td><%= p.person.display_name %></td>
+      <td><%= p.rank.name %></td>
+      <td><%= p.rank.style.description %></td>
+    </tr>
+    <% end %>
+  </table>
+  <% else %>
+  <p>None this month.</p>
+  <% end %>
+<% end %>
+
+<!-- cut here -->
