@@ -7,6 +7,7 @@
       <th>Name</th>
       <th>Rank</th>
       <th>Prev Rank</th>
+      <th>Style</th>
       <th>Cert</th>
       <th>Belt</th>
     </tr>
@@ -19,6 +20,7 @@
         <td><%= promotion[:person].display_name %></td>
         <td><%= promotion[:rank].name %></td>
         <td><%= promotion[:prev_rank] ? promotion[:prev_rank].name : "" %></td>
+        <td><%= promotion[:rank].style.description %></td>
         <td><%= promotion[:cert] ? 'Y' : 'N' %></td>
         <td><%= promotion[:belt] ? 'Y' : 'N' %></td>
       </tr>

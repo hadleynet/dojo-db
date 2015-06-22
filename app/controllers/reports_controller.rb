@@ -23,7 +23,7 @@ class ReportsController < ApplicationController
   end
 
   def recent_promotions
-    recent_promotions = Award.since(Date.today-1.month)
+    recent_promotions = Award.since(Date.today-2.months)
     @promotions = recent_promotions.collect do |promotion|
       rank = promotion.rank
       prev_rank = promotion.person.rank_prior_to(promotion)
