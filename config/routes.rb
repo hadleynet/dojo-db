@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   get 'reports/recent_promotions' => 'reports#recent_promotions'
   get 'reports/attendance' => 'reports#attendance'
   get 'reports/active_students' => 'reports#active_students'
+  get 'reports/promotions_by_date_form' => 'reports#promotions_by_date_form'
+  get 'reports/promotions_by_date' => 'reports#promotions_by_date'
   
   get 'attendances' => 'attendances#index'
   get 'attendances/form' => 'attendances#form'
