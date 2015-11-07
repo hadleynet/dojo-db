@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   
   get 'attendances' => 'attendances#index'
   get 'attendances/form' => 'attendances#form'
+  get 'attendances/month' => 'attendances#month'
   post 'attendances/add' => 'attendances#add'
   post 'attendances/add_by_session' => 'attendances#add_by_session'
 

@@ -9,6 +9,10 @@ tr:nth-child(odd) {background: #FFF}
   .navigation, .nav, .no_print {
     display: none;
   }
+  
+  .page_break {
+    page-break-after: always
+  }
 
   tr {
     page-break-inside: avoid;

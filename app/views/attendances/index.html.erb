@@ -1,6 +1,11 @@
 <h1>Classes</h1>
 
-<p>Attendance form for: <%= form_tag("/attendances/form", :method => :get) do %>
+<p>Attendance form for day: <%= form_tag("/attendances/form", :method => :get) do %>
   <%= select_date @date %>
+  <%= submit_tag "Submit" %>
+<% end %></p>
+
+<p>Attendance forms for month: <%= form_tag("/attendances/month", :method => :get) do %>
+  <%= select_date @date, order: [:year, :month] %>
   <%= submit_tag "Submit" %>
 <% end %></p>

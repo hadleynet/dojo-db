@@ -30,6 +30,16 @@ class AttendancesController < ApplicationController
     end
   end
   
+  # GET /attendances/month
+  def month
+    start_date = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 1)
+    end_date = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, -1)
+    @people = Person.active
+    @dates = (start_date..end_date).select do |date|
+      Session.for_day(date.cwday).length > 0
+    end
+  end
+
   # Handle POST from new session-based form
   def add_by_session
     @date = Date.parse(params["date"])

@@ -1,0 +1,6 @@
+<% @dates.each_with_index do |date, i| %>
+<%= render partial: "day_form", locals: {date: date, people: @people, attendance: {}, sessions: Session.for_day(date.cwday), show_submit: false} %>
+<% if i < @dates.length-1 %>
+<p class="page_break"></p>
+<% end %>
+<% end %>

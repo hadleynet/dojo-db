@@ -1,0 +1,41 @@
+<h1 class="no_print">Attendance for <%= date.strftime('%A, %B %d, %Y') %></h1>
+
+<%= form_tag "/attendances/add_by_session" do %>
+  <%= date_field_tag :date, date, :hidden => true %>
+  <table>
+    <thead>
+      <tr class="print_only">
+        <th colspan="<%= 1+sessions.length %>">Attendance for <%= date.strftime('%A, %B %d, %Y') %></th>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <% sessions.each do |session| %>
+        <th><%= session.time %><br><%= session.description %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+    <% people.each do |person| %>
+      <tr>
+        <td><b><%= person.display_name %><b></td>
+        <% sessions.each do |session| %>
+        <td align='center'>
+          <%= hidden_field_tag("attendance_#{session.id}[][person]", person.id)%>
+          <%= check_box_tag("attendance_#{session.id}[][count]", "1", attended(attendance, person.id, session.id)) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <% 3.times do %>
+      <tr class="print_only">
+        <td></td>
+        <% sessions.each do |session| %>
+        <td align='center'><%= check_box_tag(:foo) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% if is_admin? && show_submit %>
+  <%= submit_tag "Save", :class => 'no_print' %>
+  <% end %>
+<% end %>
