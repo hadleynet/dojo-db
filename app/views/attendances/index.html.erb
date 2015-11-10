@@ -5,7 +5,7 @@
   <%= submit_tag "Submit" %>
 <% end %></p>
 
-<p>Attendance forms for month: <%= form_tag("/attendances/month", :method => :get) do %>
+<p>Attendance forms for: <%= form_tag("/attendances/month", :method => :get) do %>
   <%= select_date @date, order: [:year, :month] %>
-  <%= submit_tag "Submit" %>
+  <%= submit_tag "Print" %>
 <% end %></p>
