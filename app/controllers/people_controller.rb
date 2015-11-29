@@ -80,7 +80,7 @@ class PeopleController < ApplicationController
     end
     @total_classes = @person.all_classes
     @total_classes_this_year = @person.all_classes_since(@date-1.year)
-    @start_date = @person.first_promotion ? @person.first_promotion.date : Date.today
+    @start_date = @person.start_date
   end
 
   # GET /people/new

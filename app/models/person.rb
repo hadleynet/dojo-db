@@ -57,8 +57,13 @@ class Person < ActiveRecord::Base
     end
   end
   
-  def first_promotion
-    Award.where({'person': self}).order('awards.date').first
+  def start_date
+    a = attendances.order(:date).first
+    if a.nil?
+      self.created_at
+    else
+      a.date
+    end
   end
   
   def last_promotion(style)
