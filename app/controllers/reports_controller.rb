@@ -85,4 +85,16 @@ class ReportsController < ApplicationController
       }
     end
   end
+  
+  def service_length
+    @date = Date.today
+    @people = Person.active.collect do |person|
+      {
+        person: person,
+        start_date: person.start_date
+      }
+    end
+    @people.sort_by! {|person| person[:start_date]}
+  end
+  
 end
