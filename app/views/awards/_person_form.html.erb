@@ -1,0 +1,21 @@
+<% if @award.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@award.errors.count, "error") %> prohibited this award from being saved:</h2>
+
+    <ul>
+    <% @award.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% @current_ranks.each do |high_rank| %>
+  <%= form_for(@award) do |f| %>
+    <%= hidden_field_tag "award[person_id]", @person.id %>
+      <span class="style_prefix"><%= high_rank.rank.style.description %></span>
+      <%= f.collection_select :rank_id, Rank.where("active = true AND style_id = :style_id AND ranks.order > :current_rank_order", style_id: high_rank.rank.style_id, current_rank_order: high_rank.rank.order).order(:style_id,:order), :id, :name, {}, {class: 'rank_same_width'} %>
+      <%= f.date_select :date %>
+      <%= f.submit 'Promote' %>
+  <% end %>
+<% end %>

@@ -25,7 +25,7 @@ class AwardsControllerTest < ActionController::TestCase
       post :create, award: { date: @award.date, person_id: @award.person_id, rank_id: @award.rank_id }
     end
 
-    assert_redirected_to award_path(assigns(:award))
+    assert_redirected_to people_path
   end
 
   test "should show award" do

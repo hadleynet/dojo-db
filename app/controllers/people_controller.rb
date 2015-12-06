@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy, :attendance]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :attendance, :promote]
   before_action :verify_is_admin, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /people
@@ -16,6 +16,11 @@ class PeopleController < ApplicationController
       @people = Person.active
     end
     render :index
+  end
+  
+  # GET /people/1/promote
+  def promote
+    redirect_to new_award_path(person_id: @person)
   end
   
   # GET /people/1/attendance.json

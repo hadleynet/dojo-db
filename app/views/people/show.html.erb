@@ -48,6 +48,7 @@ $.get("<%= attendance_person_path(@person, format: 'json') %>", function(data,st
 <div class='no_print'>
 <% if is_admin? %>
 <%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Promote', award_for_person_path(@person) %> |
 <% end %>
 <%= link_to 'Back', people_path %>
 </div>

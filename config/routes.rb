@@ -23,8 +23,11 @@ Rails.application.routes.draw do
     end
     member do
       get 'attendance'
+      get 'promote'
     end
   end
+
+  get 'awards/award_for_person/:person_id' => 'awards#award_for_person', as: :award_for_person
 
   get 'reports' => 'reports#index'
   get 'reports/promotions_due' => 'reports#promotions_due'

@@ -13,8 +13,24 @@ class AwardsController < ApplicationController
   def show
   end
 
+  # GET /awards/award_for_person/1
+  def award_for_person
+    @award = Award.new
+    @person = Person.find(params[:person_id])
+    @current_ranks = Style.active.collect do |style|
+      @person.last_promotion(style)
+    end.compact
+    render :new
+  end
+  
   # GET /awards/new
   def new
+    if params[:person_id]
+      @person = Person.find(params[:person_id])
+      @current_ranks = Style.active.collect do |style|
+        @person.last_promotion(style)
+      end.compact
+    end
     @award = Award.new
   end
 
@@ -29,7 +45,7 @@ class AwardsController < ApplicationController
 
     respond_to do |format|
       if @award.save
-        format.html { redirect_to @award, notice: 'Award was successfully created.' }
+        format.html { redirect_to people_path, notice: 'Award was successfully created.' }
         format.json { render :show, status: :created, location: @award }
       else
         format.html { render :new }
