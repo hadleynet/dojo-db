@@ -1,0 +1,6 @@
+<%- headers = ['Forename', 'Surname', '6 months', '3 months', '1 month'] -%>
+<%= CSV.generate_line headers -%>
+<%- @attendance.each do |person_and_attendance| -%>
+<%- person, classes = person_and_attendance -%>
+<%= CSV.generate_line([person.forename, person.surname, classes[0], classes[1], classes[2]]) -%>
+<%- end -%>

@@ -72,6 +72,13 @@ class ReportsController < ApplicationController
     @attendance = Person.active.collect do |person|
       [person, periods.collect {|period| person.all_classes_since(Date.today-period.months)}]
     end
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"attendance.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
   
   def active_students
