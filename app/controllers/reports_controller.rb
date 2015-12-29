@@ -44,6 +44,7 @@ class ReportsController < ApplicationController
   
   def promotions_by_date
     @date = params[:date] ? Date.new(params[:date][:year].to_i, params[:date][:month].to_i) : Date.today    
+    attendees_in_month = Attendance.joins(:person)
     promotions_in_month = Award.joins(:person)
       .where("to_char(awards.date, 'YYYY-MM')=:month", {month: @date.strftime('%Y-%m')})
       .order('awards.date', 'people.surname', 'people.forename')
@@ -62,6 +63,51 @@ class ReportsController < ApplicationController
         else
           @stripe_promotions.append(p)
         end
+      end
+    end
+  end
+  
+  def dues_by_date_form
+    @date = Date.today
+  end
+  
+  def dues_by_date
+    @date = params[:date] ? Date.new(params[:date][:year].to_i, params[:date][:month].to_i) : Date.today
+    attendees_in_month = Person.joins(:attendances)
+      .where("to_char(attendances.date, 'YYYY-MM')=:month", {month: @date.strftime('%Y-%m')})
+      .distinct
+      .order('people.surname', 'people.forename')
+      .to_a
+    promotions_in_month = Award.joins(:person)
+      .where("to_char(awards.date, 'YYYY-MM')=:month", {month: @date.strftime('%Y-%m')})
+      .order('awards.date', 'people.surname', 'people.forename')
+      .to_a
+    new_cert_promotions_in_month = {}
+    new_belt_promotions_in_month = {}
+    promotions_in_month.each do |promotion|
+      new_rank = promotion.rank
+      person = promotion.person
+      prev_rank = person.rank_prior_to(promotion)
+      if new_rank.style != Style.teaching
+        if new_rank.test_needed_from(prev_rank)
+          new_cert_promotions_in_month[person] ||= []
+          new_cert_promotions_in_month[person].append(promotion)
+          if new_rank.belt_color != prev_rank.belt_color
+            new_belt_promotions_in_month[person] ||= []
+            new_belt_promotions_in_month[person].append(promotion)
+          end
+        end
+      end
+    end
+    @dues = attendees_in_month.map do |attendee|
+      {person: attendee, certs: new_cert_promotions_in_month[attendee] || [], belts: new_belt_promotions_in_month[attendee] || []}
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"svkc_dues_#{@date.strftime('%Y%m')}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
       end
     end
   end

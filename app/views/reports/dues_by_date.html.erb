@@ -1,0 +1,27 @@
+<h1 class="no_print">Dues for <%= @date.strftime('%B %Y') %></h1>
+
+<table border="1">
+  <thead>
+    <tr class="print_only">
+      <th colspan="4">Dues for <%= @date.strftime('%B %Y') %></th>
+    </tr>
+    <tr> 
+      <th>Karateka</th>
+      <th>Cert(s)</th>
+      <th>Belt(s)</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @dues.each do |d| %> 
+    <tr>
+      <td><%= d[:person].display_name %></td>
+      <td><%= d[:certs].map {|c| c.rank.style_and_rank }.join(',') %></td>
+      <td><%= d[:belts].map {|c| c.rank.belt_color.description }.join(',') %></td>
+      <td><%= 20+d[:certs].length*5+d[:belts].length*10 %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p class="no_print"><%= link_to 'Download as CSV', reports_dues_by_date_path(:format => :csv, 'date[year]' => @date.year, 'date[month]' => @date.month, 'date[day]' => 1) %></p>
