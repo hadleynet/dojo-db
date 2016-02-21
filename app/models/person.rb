@@ -30,11 +30,11 @@ class Person < ActiveRecord::Base
   end
   
   def all_classes
-    Attendance.where("person_id = :person_id", {person_id: self.id}).sum(:count)
+    Attendance.where("person_id = :person_id and style_id != :teaching_id", {person_id: self.id, teaching_id: Style.teaching.id}).sum(:count)
   end
 
   def all_classes_since(date)
-    Attendance.where("person_id = :person_id and date >= :date", {person_id: self.id, date: date}).sum(:count)
+    Attendance.where("person_id = :person_id and date >= :date and style_id != :teaching_id", {person_id: self.id, date: date, teaching_id: Style.teaching.id}).sum(:count)
   end
   
   def ready_for_promotion?(style, *test_levels)
