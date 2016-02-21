@@ -1,11 +1,11 @@
-<table width="100%">
+<table width="100%" class="table table-striped">
   <thead>
     <tr>
-      <th align="left">Name</th>
-      <th align="left">Current Rank</th>
-      <th align="left">Next Rank</th>
-      <th align="center">Date Given</th>
-      <th align="center">Classes Over Minimum</th>
+      <th>Name</th>
+      <th>Current Rank</th>
+      <th>Next Rank</th>
+      <th class="text-center">Date Given</th>
+      <th class="text-center">Classes Over Minimum</th>
     </tr>
   </thead>
 
@@ -13,12 +13,12 @@
     <% promotable.each do |person| %>
       <% last_promotion = person.last_promotion(style) %>
       <% rank = last_promotion ? last_promotion.rank : style.ranks.first %>
-      <tr class="<%= 'highlight' if rank.next_rank_test.description=='Informal' %>">
-        <td align="left"><b><%= '*' if rank.next_rank_test.description=='Informal' %><%= person.display_name %></b></td>
-        <td align="left"><%= rank.name %></td>
-        <td align="left"><b><%= rank.next_rank ? rank.next_rank.name : "TBD" %></b></td>
-        <td align="center"><%= last_promotion ? last_promotion.date : "None" %></td>
-        <td align="center"><%= person.classes_since_last_promotion(style) - rank.class_delta %></td>
+      <tr class="<%= 'warning' if rank.next_rank_test.description=='Informal' %>">
+        <td><b><%= '*' if rank.next_rank_test.description=='Informal' %><%= person.display_name %></b></td>
+        <td><%= rank.name %></td>
+        <td><b><%= rank.next_rank ? rank.next_rank.name : "TBD" %></b></td>
+        <td class="text-center"><%= last_promotion ? last_promotion.date : "None" %></td>
+        <td class="text-center"><%= person.classes_since_last_promotion(style) - rank.class_delta %></td>
       </tr>
     <% end %>
   </tbody>

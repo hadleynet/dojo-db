@@ -1,11 +1,45 @@
-<h1>Classes</h1>
+<h1>Class Attendance Forms</h1>
 
-<p>Attendance form for day: <%= form_tag("/attendances/form", :method => :get) do %>
-  <%= select_date @date %>
-  <%= submit_tag "Submit" %>
-<% end %></p>
-
-<p>Attendance forms for: <%= form_tag("/attendances/month", :method => :get) do %>
-  <%= select_date @date, order: [:year, :month] %>
-  <%= submit_tag "Print" %>
-<% end %></p>
+<div class="row">
+  <div class="col-sm-3">
+    <div>
+      <%= form_tag("/attendances/form", :method => :get, :role => 'form') do %>
+        <div class="form-group">
+          <label for="day">Attendance form for day</label>
+          <input id="day" name="day" type='text' class='form-control datepicker' value='<%= @date.strftime("%m/%d/%Y") %>'/>
+        </div>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $('#day').datepicker({
+              autoclose: true,
+              todayHighlight: true,
+            });
+          });
+        </script>
+        <%= submit_tag "Submit" %>
+      <% end %>
+    </div>
+    <div class="form-group">
+        &nbsp;
+    </div>
+    <div>
+      <%= form_tag("/attendances/month", :method => :get, :role => 'form') do %>
+        <div class="form-group">
+          <label for="month">Attendance forms for month</label>
+          <input id="month" name="month" type='text' class='form-control datepicker' value='<%= @date.strftime("%m/%Y") %>'/>
+        </div>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $('#month').datepicker({
+              autoclose: true,
+              todayHighlight: true,
+              minViewMode: 1,
+              format: "mm/yyyy"
+            });
+          });
+        </script>
+        <%= submit_tag "Print" %>
+      <% end %>
+    </div>
+  </div>
+</div>

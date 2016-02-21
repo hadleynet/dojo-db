@@ -1,54 +1,62 @@
-<h1><%= @person.display_name %></h1>
+<div class="row">
+  <h2><%= @person.display_name %></h2>
 
-<p>
-  <strong>Birthdate:</strong> <%= @person.birthdate ? @person.birthdate : "N/A" %>,
-  <strong>Currently Active:</strong> <%= @person.active ? 'Y' : 'N' %>,
-  <strong>Total Classes:</strong> <%= @total_classes %> (<%= @total_classes/24 %> days),
-  <strong>Active Since: </strong> <%= @start_date %> (<%= distance_of_time_in_words(@start_date, @date) %>).
-</p>
+  <p>
+    <strong>Birthdate:</strong> <%= @person.birthdate ? @person.birthdate : "N/A" %>,
+    <strong>Currently Active:</strong> <%= @person.active ? 'Y' : 'N' %>,
+    <strong>Total Classes:</strong> <%= @total_classes %>,
+    <strong>Active Since: </strong> <%= @start_date.to_formatted_s(:us) %> (<%= distance_of_time_in_words(@start_date, @date) %>).
+  </p>
+</div>
 
-<h2>Attendance Last Year (<%= @total_classes_this_year %> Classes)</h2>
-<canvas id="myChart" width="800" height="300"></canvas>
-<script>
-$.get("<%= attendance_person_path(@person, format: 'json') %>", function(data,status){
-    myNewChart = new Chart($("#myChart").get(0).getContext("2d")).Bar(data)
-  });
-</script>
+<div class="row">
+  <h3>Attendance Last Year (<%= @total_classes_this_year %> Classes)</h3>
+  <canvas id="myChart" width="600" height="200"></canvas>
+  <script>
+  $.get("<%= attendance_person_path(@person, format: 'json') %>", function(data,status){
+      myNewChart = new Chart($("#myChart").get(0).getContext("2d")).Bar(data)
+    });
+  </script>
+</div>
 
-<h2>Ranks Held</h2>
+<div class="row">
+  <h3>Ranks Held</h3>
 
-<table border="1" width="800">
-<tr>
-<% @awards.each do |style_and_awards| %>
-<% style, award_list = style_and_awards %>
-<td valign="top" width="266">
-<table>
-  <thead>
-    <tr>
-      <th colspan="2"><%= style.description %></th>
-    </tr>
-  </thead>
+  <table class="table">
+  <tr>
+  <% @awards.each do |style_and_awards| %>
+    <% style, award_list = style_and_awards %>
+    <td valign="top" width="266">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th colspan="2"><%= style.description %></th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% award_list.each do |award| %>
-      <tr>
-        <td><%= award.date %></td>
-        <td><%= award.rank.name %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</td>
-<% end %>
-</tr>
-</table>
+        <tbody>
+          <% award_list.each do |award| %>
+            <tr>
+              <td><%= award.date.to_formatted_s(:us) %></td>
+              <td><%= award.rank.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </td>
+  <% end %>
+  </tr>
+  </table>
+</div>
 
-<p>Effective date: <%= @date %>.</p>
+<div class="row">
+  <p>Effective date: <%= @date.to_formatted_s(:us) %>.</p>
 
-<div class='no_print'>
-<% if is_admin? %>
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Promote', award_for_person_path(@person) %> |
-<% end %>
-<%= link_to 'Back', people_path %>
+  <div class='no_print'>
+  <% if is_admin? %>
+  <%= link_to 'Edit', edit_person_path(@person) %> |
+  <%= link_to 'Promote', award_for_person_path(@person) %> |
+  <% end %>
+  <%= link_to 'Back', people_path %>
+  </div>
 </div>

@@ -1,6 +1,6 @@
-<h1 class="no_print">Dues for <%= @date.strftime('%B %Y') %></h1>
+<h3 class="no_print">Dues for <%= @date.strftime('%B %Y') %></h3>
 
-<table border="1">
+<table class="table-condensed table-striped">
   <thead>
     <tr class="print_only">
       <th colspan="4">Dues for <%= @date.strftime('%B %Y') %></th>
@@ -18,7 +18,7 @@
       <td><%= d[:person].display_name %></td>
       <td><%= d[:certs].map {|c| c.rank.style_and_rank }.join(',') %></td>
       <td><%= d[:belts].map {|c| c.rank.belt_color.description }.join(',') %></td>
-      <td><%= 20+d[:certs].length*5+d[:belts].length*10 %></td>
+      <td><%= 20+d[:certs].length*10 %><%= " + belt fees" if d[:belts].length > 0 %></td>
     </tr>
     <% end %>
   </tbody>

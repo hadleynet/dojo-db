@@ -8,7 +8,7 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/form
   def form
-    @date = params[:date] ? Date.new(params[:date][:year].to_i, params[:date][:month].to_i, params[:date][:day].to_i) : Date.today
+    @date = params[:day] ? Date.strptime(params[:day], '%m/%d/%Y') : Date.today
     if Attendance.non_session_based?(@date)
       @people = Person.active
       @styles = Style.active
@@ -32,8 +32,9 @@ class AttendancesController < ApplicationController
   
   # GET /attendances/month
   def month
-    start_date = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 1)
-    end_date = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, -1)
+    date = params[:month] ? Date.strptime(params[:month], '%m/%Y') : Date.today
+    start_date = Date.new(date.year, date.month, 1)
+    end_date = Date.new(date.year, date.month, -1)
     @people = Person.active
     @dates = (start_date..end_date).select do |date|
       Session.for_day(date.cwday).length > 0

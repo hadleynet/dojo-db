@@ -1,9 +1,9 @@
-<h1>Eligible for Formal Test</h1>
+<h2>Eligible for Formal Test</h2>
 
 <% @promotable_with_test_by_style.each do |style_and_promotable|%>
   <% style, promotable = style_and_promotable %>
   <% if promotable and promotable.length>0 %>
-    <h2><%= style.description %></h2>
+    <h3><%= style.description %></h3>
     <%= render partial: "students", locals: {promotable: promotable, style: style} %>
   <% end %>
 <% end %>

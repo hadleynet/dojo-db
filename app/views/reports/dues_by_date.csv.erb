@@ -1,5 +1,5 @@
-<%- headers = ['Forename', 'Surname', 'Cert(s)', 'Cert Count', 'Belt(s)', 'Belt Count', 'Total Due'] -%>
+<%- headers = ['Forename', 'Surname', 'Cert(s)', 'Cert Count', 'Total Dues and Certs', 'Belt(s)', 'Belt Count'] -%>
 <%= CSV.generate_line headers -%>
 <%- @dues.each do |d| -%>
-<%= CSV.generate_line([d[:person].forename, d[:person].surname, d[:certs].map {|c| c.rank.style_and_rank }.join(','), d[:certs].length, d[:belts].map {|c| c.rank.belt_color.description }.join(','), d[:belts].length, 20+d[:certs].length*5+d[:belts].length*10]).html_safe -%>
+<%= CSV.generate_line([d[:person].forename, d[:person].surname, d[:certs].map {|c| c.rank.style_and_rank }.join(','), d[:certs].length, 20+d[:certs].length*10, d[:belts].map {|c| c.rank.belt_color.description }.join(','), d[:belts].length]).html_safe -%>
 <%- end -%>
