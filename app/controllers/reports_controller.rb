@@ -68,11 +68,10 @@ class ReportsController < ApplicationController
   end
   
   def dues_by_date_form
-    @date = Date.today
   end
   
   def dues_by_date
-    @date = params[:date] ? Date.new(params[:date][:year].to_i, params[:date][:month].to_i) : Date.today
+    @date = params[:month] ? Date.strptime(params[:month], '%m/%Y') : Date.today
     attendees_in_month = Person.joins(:attendances)
       .where("to_char(attendances.date, 'YYYY-MM')=:month", {month: @date.strftime('%Y-%m')})
       .distinct

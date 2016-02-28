@@ -42,10 +42,11 @@ class AwardsController < ApplicationController
   # POST /awards.json
   def create
     @award = Award.new(award_params)
+    @award.date = params[:day] ? Date.strptime(params[:day], '%m/%d/%Y') : Date.today
 
     respond_to do |format|
       if @award.save
-        format.html { redirect_to people_path, notice: 'Award was successfully created.' }
+        format.html { redirect_to people_path, notice: "#{@award.person.display_name} was promoted to #{@award.rank.name} in #{@award.style.description}." }
         format.json { render :show, status: :created, location: @award }
       else
         format.html { render :new }
@@ -59,7 +60,7 @@ class AwardsController < ApplicationController
   def update
     respond_to do |format|
       if @award.update(award_params)
-        format.html { redirect_to @award, notice: 'Award was successfully updated.' }
+        format.html { redirect_to @award, notice: 'Promotion was successfully updated.' }
         format.json { render :show, status: :ok, location: @award }
       else
         format.html { render :edit }
@@ -73,7 +74,7 @@ class AwardsController < ApplicationController
   def destroy
     @award.destroy
     respond_to do |format|
-      format.html { redirect_to awards_url, notice: 'Award was successfully destroyed.' }
+      format.html { redirect_to awards_url, notice: 'Promotion was successfully deleted.' }
       format.json { head :no_content }
     end
   end

@@ -23,12 +23,15 @@
       <% @people.each do |person| %>
         <tr>
           <td><%= link_to person.display_name, person_path(person) %></td>
-          <td><%= person.birthdate %></td>
+          <td><%= person.birthdate ? person.birthdate.to_formatted_s(:us) : '' %></td>
           <% if @search %>
           <td><%= person.active ? 'Y' : 'N' %></td>
           <% end %>
           <% if is_admin? %>
-          <td><%= link_to 'Edit', edit_person_path(person) %></td>
+          <td>
+            <%= link_to 'Promote', award_for_person_path(person), :class => 'btn btn-primary' %>
+            <%= link_to 'Edit', edit_person_path(person), :class => 'btn btn-warning' %>
+          </td>
           <% end %>
         </tr>
       <% end %>
