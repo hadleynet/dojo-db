@@ -24,4 +24,8 @@
   </tbody>
 </table>
 
-<p class="no_print"><%= link_to 'Download as CSV', reports_dues_by_date_path(:format => :csv, 'date[year]' => @date.year, 'date[month]' => @date.month, 'date[day]' => 1), :class => 'btn btn-success' %></p>
+<p class="no_print">
+<%= link_to reports_dues_by_date_path(:format => :csv, 'date[year]' => @date.year, 'date[month]' => @date.month, 'date[day]' => 1), :class => 'btn btn-success' do %>
+  <i class="glyphicon glyphicon-download"></i> Download as CSV
+<% end %>  
+</p>

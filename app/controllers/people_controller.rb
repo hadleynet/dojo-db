@@ -9,9 +9,9 @@ class PeopleController < ApplicationController
   end
   
   def search
-    if params[:search]
-      @people = Person.search(params[:search])
-      @search = params[:search]
+    if params[:search_field]
+      @people = Person.search(params[:search_field])
+      @search = params[:search_field]
     else
       @people = Person.active
     end

@@ -29,8 +29,12 @@
           <% end %>
           <% if is_admin? %>
           <td>
-            <%= link_to 'Promote', award_for_person_path(person), :class => 'btn btn-primary' %>
-            <%= link_to 'Edit', edit_person_path(person), :class => 'btn btn-warning' %>
+            <%= link_to award_for_person_path(person), :class => 'btn btn-sm btn-primary' do %>
+              <i class="glyphicon glyphicon-education"></i> Promote
+            <% end %>
+            <%= link_to edit_person_path(person), :class => 'btn btn-sm btn-warning' do %>
+              <i class="glyphicon glyphicon-pencil"></i> Edit
+            <% end %>
           </td>
           <% end %>
         </tr>
@@ -45,11 +49,14 @@
         <label for="search_field">Name</label>
         <%= text_field_tag :search, params[:search], :id => 'search_field', :name => 'search_field' %>
       </div>
-      <%= submit_tag "Search", :class => 'btn' %> 
+      <%= button_tag :type => 'submit', :class => 'btn btn-sm btn-success' do %> 
+        <i class="glyphicon glyphicon-search"></i> Search
+      <% end %>
     <% end %> 
   </div>
 </div>
 <% if is_admin? %>
+  <div class="row">&nbsp;</div>
   <div class="row">
     <%= link_to new_person_path, class: 'btn btn-success' do %>
       <i class="glyphicon glyphicon-plus"></i> New Person
