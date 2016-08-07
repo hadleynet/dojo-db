@@ -1,0 +1,1 @@
+Postgres Rails app for managing dojo attendance and ranks.
