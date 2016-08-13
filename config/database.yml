@@ -1,3 +1,7 @@
+# Note to self: the username and password are not used when the app is deployed
+# in Heroku, see https://devcenter.heroku.com/articles/rails-database-connection-behavior
+# Settings here only apply to local dev environment
+
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -16,19 +20,3 @@ development:
 test:
   <<: *default
   database: dojo_test
-
-#default: &default
-#  adapter: sqlite3
-#  pool: 5
-#  timeout: 5000
-#development:
-#  <<: *default
-#  database: db/development.sqlite3
-#
-#test:
-#  <<: *default
-#  database: db/test.sqlite3
-#
-#production:
-#  <<: *default
-#  database: db/production.sqlite3
