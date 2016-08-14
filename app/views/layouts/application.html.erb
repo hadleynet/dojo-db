@@ -70,10 +70,10 @@
   </nav>
   <div class="container">
     <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
+      <p class="alert alert-success no_print"><%= notice %></p>
     <% end %>
     <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <p class="alert alert-danger no_print"><%= alert %></p>
     <% end %>     
   
     <%= yield %>
