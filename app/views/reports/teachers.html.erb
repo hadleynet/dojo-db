@@ -1,0 +1,31 @@
+<h3 class="no_print">Teaching Activity as of <%= @date.to_formatted_s(:us) %></h3>
+
+<table class="table-condensed table-striped">
+  <thead>
+    <tr class="print_only">
+      <th>Teaching Activity as of <%= @date.to_formatted_s(:us) %></th>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <th class="text-center">Days Taught<br/>(last year)</th>
+      <th class="text-center">Rank</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teachers.each do |teacher| %>
+      <tr>
+        <td>
+          <%= link_to teacher[:person].display_name, teacher[:person] %>
+        </td>
+        <td class="text-center"><%= teacher[:days_taught_last_year] %></td>
+        <td>
+        <% if teacher[:last_teaching_promotion] %>
+          <% award = teacher[:last_teaching_promotion] %>
+          <%= "#{award.rank.name} (#{award.date.to_formatted_s(:us)})" %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

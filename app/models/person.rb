@@ -37,6 +37,10 @@ class Person < ActiveRecord::Base
     Attendance.where("person_id = :person_id and date >= :date and style_id != :teaching_id", {person_id: self.id, date: date, teaching_id: Style.teaching.id}).sum(:count)
   end
   
+  def days_teaching_since(date)
+    Attendance.where("person_id = :person_id and date >= :date and style_id = :teaching_id", {person_id: self.id, date: date, teaching_id: Style.teaching.id}).sum(:count)
+  end
+  
   def ready_for_promotion?(style, *test_levels)
     last_promotion = last_promotion(style)
     rank = last_promotion ? last_promotion.rank : style.ranks.first
@@ -64,6 +68,10 @@ class Person < ActiveRecord::Base
     else
       a.date
     end
+  end
+  
+  def last_teaching_promotion
+    Award.joins(:rank).where({'awards.person': self, 'ranks.style': Style.teaching}).order('awards.date', "ranks.order").last
   end
   
   def last_promotion(style)

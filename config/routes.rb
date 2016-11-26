@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get 'reports/dues_by_date_form' => 'reports#dues_by_date_form'
   get 'reports/dues_by_date' => 'reports#dues_by_date'
   get 'reports/service_length' => 'reports#service_length'
+  get 'reports/teachers' => 'reports#teachers'
   
   get 'attendances' => 'attendances#index'
   get 'attendances/form' => 'attendances#form'

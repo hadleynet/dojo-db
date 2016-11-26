@@ -126,6 +126,14 @@ class ReportsController < ApplicationController
     end
   end
   
+  def teachers
+    @date = Date.today
+    @teachers = Person.active.collect do |person|
+      {:person => person, :last_teaching_promotion => person.last_teaching_promotion, :days_taught_last_year => person.days_teaching_since(Date.today - 1.year)}
+    end
+    @teachers = @teachers.select {|teacher| teacher[:days_taught_last_year] > 0}
+  end
+  
   def active_students
     @date = Date.today
     @styles = Style.active
