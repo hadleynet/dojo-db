@@ -8,7 +8,8 @@
     <tr>
       <th align="left">Name</th>
       <th>Start Date</th>
-      <th>Length of Service</th>
+      <th>Time Since Start</th>
+      <th>Months Active<sup>*</sup></th>
     </tr>
   </thead>
 
@@ -20,7 +21,10 @@
         </td>
         <td><%= person[:start_date].to_formatted_s(:us) %></td>
         <td><%= distance_of_time_in_words(person[:start_date], @date) %></td>
+        <td><%= person[:months] / 12 %> years, <%= person[:months] % 12 %> months</td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<p class="small"><sup>*</sup> Attended at least one class during the month</p>

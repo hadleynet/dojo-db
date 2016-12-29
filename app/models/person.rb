@@ -70,6 +70,10 @@ class Person < ActiveRecord::Base
     end
   end
   
+  def months_attended_class
+    Attendance.select("to_char(date, 'YYYY-MM') as month").where("person_id = :person_id", {person_id: self.id}).uniq.length
+  end
+  
   def last_teaching_promotion
     Award.joins(:rank).where({'awards.person': self, 'ranks.style': Style.teaching}).order('awards.date', "ranks.order").last
   end

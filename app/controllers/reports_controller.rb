@@ -151,7 +151,8 @@ class ReportsController < ApplicationController
     @people = Person.active.collect do |person|
       {
         person: person,
-        start_date: person.start_date
+        start_date: person.start_date,
+        months: person.months_attended_class
       }
     end
     @people.sort_by! {|person| person[:start_date]}
