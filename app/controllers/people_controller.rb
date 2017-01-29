@@ -145,7 +145,7 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:id, :forename, :surname, :birthdate, :active)
+      params.require(:person).permit(:id, :forename, :surname, :birthdate, :active, :belt_size)
     end
     
     def get_class_count(attendance, label)

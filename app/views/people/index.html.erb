@@ -10,11 +10,12 @@
       <tr>
         <th>Name</th>
         <th>Birthdate</th>
+        <th>Belt Size</th>
         <% if @search %>
         <th>Active</th>
         <% end %>
         <% if is_admin? %>
-        <th></th>
+        <th class="no_print">Actions</th>
         <% end %>
       </tr>
     </thead>
@@ -24,11 +25,12 @@
         <tr>
           <td><%= link_to person.display_name, person_path(person) %></td>
           <td><%= person.birthdate ? person.birthdate.to_formatted_s(:us) : '' %></td>
+          <td><%= person.belt_size || 'Unknown' %></td>
           <% if @search %>
           <td><%= person.active ? 'Y' : 'N' %></td>
           <% end %>
           <% if is_admin? %>
-          <td>
+          <td class="no_print">
             <%= link_to award_for_person_path(person), :class => 'btn btn-sm btn-primary' do %>
               <i class="glyphicon glyphicon-education"></i> Promote
             <% end %>
