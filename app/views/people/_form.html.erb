@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :birthdate %><br>
-    <%= f.date_select :birthdate, :include_blank => true %>
+    <%= f.date_select :birthdate, :include_blank => true, :start_year => Date.today.year - 90, :end_year => Date.today.year - 3 %>
   </div>
   <div class="field">
     <%= f.label :belt_size %><br>
