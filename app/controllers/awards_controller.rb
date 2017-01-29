@@ -42,7 +42,6 @@ class AwardsController < ApplicationController
   # POST /awards.json
   def create
     @award = Award.new(award_params)
-    @award.date = params[:day] ? Date.strptime(params[:day], '%m/%d/%Y') : Date.today
 
     respond_to do |format|
       if @award.save
