@@ -1,4 +1,3 @@
-<%= form_for(@award) do |f| %>
   <% if @award.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@award.errors.count, "error") %> prohibited this award from being saved:</h2>
@@ -11,19 +10,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.date_select :date %>
+<div class="row">
+  <div class="col-sm-3">
+    <%= form_for(@award, :html => {role: 'form'}) do |f| %>
+      <div class="form-group">
+        <%= f.label :date %><br>
+        <%= f.text_field :date, {:value => @award.date ? @award.date.strftime('%m/%d/%Y') : Date.today.strftime('%m/%d/%Y'), :class => 'form-control datepicker'} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :person_id %><br>
+        <%= f.collection_select :person_id, Person.where(active: true).order(:surname,:forename), :id, :display_name, {class: 'form-control'} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :rank_id %><br>
+        <%= f.collection_select :rank_id, Rank.where(active: true).order(:style_id,:order), :id, :style_and_rank, {class: 'form-control'}%>
+      </div>
+      <div class="form-group">
+        <%= f.submit 'Promote', :class => 'btn btn-warning' %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :person_id %><br>
-    <%= f.collection_select :person_id, Person.where(active: true).order(:surname,:forename), :id, :display_name %>
-  </div>
-  <div class="field">
-    <%= f.label :rank_id %><br>
-    <%= f.collection_select :rank_id, Rank.where(active: true).order(:style_id,:order), :id, :style_and_rank %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+      autoclose: true,
+      todayHighlight: true,
+    });
+  });
+</script>

@@ -86,6 +86,9 @@ class AwardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def award_params
-      params.require(:award).permit(:date, :person_id, :rank_id)
+      p = params.require(:award).permit(:date, :person_id, :rank_id)
+      # handle the date format rendered by the JS date picker.
+      p[:date] = Date.strptime(p[:date], '%m/%d/%Y')
+      p
     end
 end

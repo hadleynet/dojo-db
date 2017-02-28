@@ -20,8 +20,8 @@
       <%= f.collection_select :rank_id, Rank.where("active = true AND style_id = :style_id AND ranks.order > :current_rank_order", style_id: high_rank.rank.style_id, current_rank_order: high_rank.rank.order).order(:style_id,:order), :id, :name, {}, {class: 'form-control'} %>
     </div>
     <div class="form-group">
-      <label for="day">Effective Date</label>
-      <input id="day" name="day" type='text' class='form-control datepicker' value='<%= Date.today.strftime("%m/%d/%Y") %>'/>
+      <label for="award_date">Effective Date</label>
+      <%= f.text_field :date, {:value => @award.date || Date.today.strftime('%m/%d/%Y'), :class => 'form-control datepicker'} %>
     </div>
     <%= f.submit 'Promote', :class => 'btn btn-warning' %>
   <% end %>
