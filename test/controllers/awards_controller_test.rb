@@ -22,7 +22,7 @@ class AwardsControllerTest < ActionController::TestCase
 
   test "should create award" do
     assert_difference('Award.count') do
-      post :create, award: { date: @award.date, person_id: @award.person_id, rank_id: @award.rank_id }
+      post :create, award: { date: @award.date.strftime('%m/%d/%Y'), person_id: @award.person_id, rank_id: @award.rank_id }
     end
 
     assert_redirected_to people_path
@@ -39,7 +39,7 @@ class AwardsControllerTest < ActionController::TestCase
   end
 
   test "should update award" do
-    patch :update, id: @award, award: { date: @award.date, person_id: @award.person_id, rank_id: @award.rank_id }
+    patch :update, id: @award, award: { date: @award.date.strftime('%m/%d/%Y'), person_id: @award.person_id, rank_id: @award.rank_id }
     assert_redirected_to award_path(assigns(:award))
   end
 
