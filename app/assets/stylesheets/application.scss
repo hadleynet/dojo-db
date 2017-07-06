@@ -48,8 +48,10 @@ canvas {
   }
   
   input {
-    -moz-appearance:none;
+    -moz-appearance: none;
     outline: 1px solid #000000;
+    width: 10px;
+    height: 10px;
   }
 
   // add table borders for print version
