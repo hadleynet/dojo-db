@@ -13,7 +13,7 @@
     <% promotable.each do |person| %>
       <% last_promotion = person.last_promotion(style) %>
       <% rank = last_promotion ? last_promotion.rank : style.ranks.first %>
-      <tr">
+      <tr>
         <td><b><%= person.display_name %></b></td>
         <td><%= rank.name %></td>
         <td><b><%= rank.next_rank ? rank.next_rank.name : "TBD" %></b></td>

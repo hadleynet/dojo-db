@@ -17,7 +17,7 @@
     <tbody>
     <% people.each do |person| %>
       <tr>
-        <td><b><%= person.display_name %><b></td>
+        <td><b><%= person.display_name %></b></td>
         <% sessions.each do |session| %>
         <td align='center'>
           <%= hidden_field_tag("attendance_#{session.id}[][person]", person.id)%>

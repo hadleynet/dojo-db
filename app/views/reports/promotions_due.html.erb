@@ -1,6 +1,6 @@
 <h2>Promotions Due as of <%= @date.to_formatted_s(:us) %></h2>
 
-<h3>Eligible for New Stripe</h2>
+<h3>Eligible for New Stripe</h3>
 
 <% @promotable_now_by_style.each do |style_and_promotable|%>
   <% style, promotable = style_and_promotable %>
@@ -10,7 +10,7 @@
   <% end %>
 <% end %>
 
-<h3>Eligible for New Belt After Assessment</h2>
+<h3>Eligible for New Belt After Assessment</h3>
 
 <% @promotable_after_assess_by_style.each do |style_and_promotable|%>
   <% style, promotable = style_and_promotable %>
