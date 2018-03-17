@@ -1,4 +1,4 @@
-# Note to self: the username and password are not used when the app is deployed
+# Note to self: the host, username and password are not used when the app is deployed
 # in Heroku, see https://devcenter.heroku.com/articles/rails-database-connection-behavior
 # Settings here only apply to local dev environment
 
@@ -6,8 +6,9 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
+  host: localhost
   username: dojo
-  password:
+  password: dojo
 
 production:
   <<: *default
