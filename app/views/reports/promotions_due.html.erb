@@ -1,11 +1,21 @@
-<h2>Eligible for Promotion as of <%= @date.to_formatted_s(:us) %></h2>
+<h2>Promotions Due as of <%= @date.to_formatted_s(:us) %></h2>
 
-<% @promotable_without_test_by_style.each do |style_and_promotable|%>
+<h3>Eligible for New Stripe</h2>
+
+<% @promotable_now_by_style.each do |style_and_promotable|%>
   <% style, promotable = style_and_promotable %>
   <% if promotable and promotable.length>0 %>
-    <h3><%= style.description %></h3>
+<!--     <h4><%= style.description %></h4> -->
     <%= render partial: "students", locals: {promotable: promotable, style: style} %>
   <% end %>
 <% end %>
 
-<p><b>*</b> needs informal assessment before promotion.</p>
+<h3>Eligible for New Belt After Assessment</h2>
+
+<% @promotable_after_assess_by_style.each do |style_and_promotable|%>
+  <% style, promotable = style_and_promotable %>
+  <% if promotable and promotable.length>0 %>
+<!--     <h4><%= style.description %></h4> -->
+    <%= render partial: "students", locals: {promotable: promotable, style: style} %>
+  <% end %>
+<% end %>

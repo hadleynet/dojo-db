@@ -6,11 +6,14 @@ class ReportsController < ApplicationController
 
   # GET /reports/promotions_due
   def promotions_due
-#    styles = Style.active
     @date = Date.today
+#    styles = Style.active
     styles = [Style.shorin_ryu]
-    @promotable_without_test_by_style = styles.map do |style|
-      [style, Person.all_promotable(style, Test.none, Test.informal)]
+    @promotable_now_by_style = styles.map do |style|
+      [style, Person.all_promotable(style, Test.none)]
+    end
+    @promotable_after_assess_by_style = styles.map do |style|
+      [style, Person.all_promotable(style, Test.informal)]
     end
   end
 
