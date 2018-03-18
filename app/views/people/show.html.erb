@@ -54,10 +54,10 @@
   <p>Effective date: <%= @date.to_formatted_s(:us) %>.</p>
 
   <div class='no_print'>
-  <% if is_admin? %>
-  <%= link_to 'Edit', edit_person_path(@person), :class => 'btn btn-warning' %>
-  <%= link_to 'Promote', award_for_person_path(@person), :class => 'btn btn-primary' %>
-  <% end %>
-  <%= link_to 'Back', people_path, :class => 'btn btn-success' %>
+    <% if is_admin? %>
+    <%= link_to 'Edit', edit_person_path(@person), :class => 'btn btn-warning' %>
+    <%= link_to 'Promote', award_for_person_path(@person), :class => 'btn btn-primary' %>
+    <% end %>
+    <%= link_to 'Back', people_path, :class => 'btn btn-success' %>
   </div>
 </div>

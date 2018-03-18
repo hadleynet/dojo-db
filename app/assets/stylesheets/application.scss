@@ -22,6 +22,10 @@ canvas {
   height: auto;
 }
 
+.container {
+  padding-bottom: 10px;
+}
+
 @media print {
   // hide form and navigation elements for print
   .navigation, .nav, .no_print {
