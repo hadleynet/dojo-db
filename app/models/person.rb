@@ -7,6 +7,10 @@ class Person < ActiveRecord::Base
     "#{forename} #{surname}"
   end
   
+  def display_belt_size
+    belt_size.nil? || belt_size.length==0 ? "Unknown" : belt_size
+  end
+  
   def styles
     Award.joins(:rank).where("awards.person_id=:person", {person:self.id}).pluck("DISTINCT ranks.style_id")
   end

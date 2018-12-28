@@ -25,7 +25,7 @@
         <tr>
           <td><%= link_to person.display_name, person_path(person) %></td>
           <td><%= person.birthdate ? person.birthdate.to_formatted_s(:us) : '' %></td>
-          <td><%= person.belt_size || 'Unknown' %></td>
+          <td><%= person.display_belt_size %></td>
           <% if @search %>
           <td><%= person.active ? 'Y' : 'N' %></td>
           <% end %>

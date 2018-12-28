@@ -4,7 +4,7 @@
   <p>
     <strong>Birthdate:</strong> <%= @person.birthdate ? @person.birthdate.to_formatted_s(:us) : "N/A" %>,
     <strong>Currently Active:</strong> <%= @person.active ? 'Y' : 'N' %>,
-    <strong>Belt Size:</strong> <%= @person.belt_size || 'Unknown' %>,
+    <strong>Belt Size:</strong> <%= @person.display_belt_size %>,
     <strong>Total Classes:</strong> <%= @total_classes %>,
     <strong>Start Date: </strong> <%= @start_date.to_formatted_s(:us) %> (<%= distance_of_time_in_words(@start_date, @date) %>).
   </p>

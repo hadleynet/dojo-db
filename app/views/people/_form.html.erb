@@ -31,6 +31,12 @@
     <%= f.label :active %><br>
     <%= f.check_box :active %>
   </div>
+  <% if local_assigns[:add_initial_rank] %>
+  <div class="form-group">
+    <%= f.label :rank_id, 'Initial Rank' %><br>
+    <%= collection_select :initial_rank, :rank_id, Rank.where(active: true).order(:style_id,:order), :id, :style_and_rank, {class: 'form-control'}%>
+  </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

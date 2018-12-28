@@ -91,6 +91,7 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
+    @person.active = true
   end
 
   # GET /people/1/edit
@@ -100,10 +101,20 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(person_params)
+    Person.transaction do
+      @person = Person.new(person_params)
+      @success = @person.save
+      if @success && params[:initial_rank] && params[:initial_rank][:rank_id]
+        initial_promotion = Award.new
+        initial_promotion.person = @person
+        initial_promotion.date = Date.today
+        initial_promotion.rank = Rank.find(params[:initial_rank][:rank_id])
+        initial_promotion.save
+      end
+    end
 
     respond_to do |format|
-      if @person.save
+      if @success
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
         format.json { render :show, status: :created, location: @person }
       else
