@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class StylesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @style = styles(:goju)

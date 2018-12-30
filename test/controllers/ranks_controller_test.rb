@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RanksControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @rank = ranks(:two)

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class AttendancesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @attendance = attendances(:one)

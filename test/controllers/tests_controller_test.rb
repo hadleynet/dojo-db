@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class TestsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @test = tests(:none)
