@@ -26,7 +26,7 @@
       <%= form_tag("/attendances/month", :method => :get, :role => 'form') do %>
         <div class="form-group">
           <label for="month">Attendance forms for month</label>
-          <input id="month" name="month" type='text' class='form-control datepicker' value='<%= @date.strftime("%m/%Y") %>'/>
+          <input id="month" name="month" type='text' class='form-control datepicker' value='<%= (@date+1.month).strftime("%m/%Y") %>'/>
         </div>
         <script type="text/javascript">
           $(document).ready(function(){
