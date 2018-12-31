@@ -10,7 +10,9 @@
       <th class="text-center">6 months</th>
       <th class="text-center">3 months</th>
       <th class="text-center">1 month</th>
+      <% if is_admin? %>
       <th class="text-center no_print">Action</th>
+      <% end %>
     </tr>
   </thead>
 
@@ -24,14 +26,9 @@
         <td class="text-center"><%= classes[0] %></td>
         <td class="text-center"><%= classes[1] %></td>
         <td class="text-center">
-<!--        <% if classes[2]==0 %>
-          <a href="mailto:<%= "no-one@snai1mai1.com?subject=Long%20time,%20no%20see&body=Hey%20#{person.forename}%2C%0A%0AWe%20haven%27t%20see%20you%20at%20the%20svkc%20in%20awhile%20hope%20all%20is%20well%20and%20we%20see%20you%20soon.....%0A%0AJoe" %>">
-        <% end %>-->
           <%= classes[2] %>
-<!--        <% if classes[2]==0 %>
-          </a>
-        <% end %>-->
         </td>
+        <% if is_admin? %>
         <td class="text-center no_print">
         <% if classes[1]==0 %>
             <%= link_to deactivate_person_path(person), method: :POST, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-warning' do %>
@@ -39,6 +36,7 @@
             <% end %>
         <% end %>
         </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
