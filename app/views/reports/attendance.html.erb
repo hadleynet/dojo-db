@@ -10,6 +10,7 @@
       <th class="text-center">6 months</th>
       <th class="text-center">3 months</th>
       <th class="text-center">1 month</th>
+      <th class="text-center no_print">Action</th>
     </tr>
   </thead>
 
@@ -31,9 +32,22 @@
           </a>
         <% end %>-->
         </td>
+        <td class="text-center no_print">
+        <% if classes[1]==0 %>
+            <%= link_to deactivate_person_path(person), method: :POST, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-warning' do %>
+              <i class="glyphicon glyphicon-pencil"></i> Deactivate
+            <% end %>
+        <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<p class="no_print"><%= link_to 'Download as CSV', reports_attendance_path(format: :csv) %></p>
+<p class="no_print">
+  <%= link_to reports_attendance_path(format: :csv), :class => 'btn btn-sm btn-primary' do %>
+    <i class="glyphicon glyphicon-download-alt"></i> Download as CSV
+  <% end %>
+</p>
+
+

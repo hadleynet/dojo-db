@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     member do
       get 'attendance'
       get 'promote'
+      post 'deactivate'
     end
   end
 

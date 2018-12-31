@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy, :attendance, :promote]
-  before_action :verify_is_admin, only: [:new, :edit, :create, :update, :destroy]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :attendance, :promote, :deactivate]
+  before_action :verify_is_admin, only: [:new, :edit, :create, :update, :destroy, :deactivate]
 
   # GET /people
   # GET /people.json
@@ -146,6 +146,13 @@ class PeopleController < ApplicationController
 #       format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
 #       format.json { head :no_content }
 #     end
+  end
+  
+  def deactivate
+    @person.active = false
+    @person.save
+    session[:return_to] ||= request.referer
+    redirect_to session.delete(:return_to), notice: "#{@person.display_name} was deactivated"
   end
 
   private
