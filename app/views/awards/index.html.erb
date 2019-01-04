@@ -8,7 +8,7 @@
       <th>Style</th>
       <th>Rank</th>
       <% if is_admin? %>
-      <th colspan="2"></th>
+      <th class="no_print">Actions</th>
       <% end %>
     </tr>
   </thead>
@@ -21,8 +21,14 @@
         <td><%= award.rank.style.description %></td>
         <td><%= award.rank.name %></td>
         <% if is_admin? %>
-        <td><%= link_to 'Edit', edit_award_path(award) %></td>
-        <td><%= link_to 'Destroy', award, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="no_print">
+          <%= link_to edit_award_path(award), :class => 'btn btn-sm btn-warning' do %>
+            <i class="glyphicon glyphicon-pencil"></i> Edit
+          <% end %>
+          <%= link_to award_path(award), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger' do %>
+            <i class="glyphicon glyphicon-remove"></i> Delete
+          <% end %>
+        </td>
         <% end %>
       </tr>
     <% end %>
@@ -30,5 +36,7 @@
 </table>
 
 <% if is_admin? %>
-<%= link_to 'New Promotion', new_award_path, :class => 'btn btn-warning' %>
+<%= link_to new_award_path, :class => 'btn btn-success' do %>
+  <i class="glyphicon glyphicon-plus"></i> New Promotion
+<% end %>
 <% end %>
