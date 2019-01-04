@@ -1,43 +1,49 @@
-<%= form_for(@person) do |f| %>
-  <% if @person.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+<div class="row">
+  <div class="col-sm-3">
+    <%= form_for(@person) do |f| %>
+      <% if @person.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
 
-      <ul>
-      <% @person.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @person.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :forename %><br>
-    <%= f.text_field :forename %>
+      <div class="form-group">
+        <%= f.label :forename %><br>
+        <%= f.text_field :forename, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :surname %><br>
+        <%= f.text_field :surname, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :birthdate %><br>
+        <%= f.date_select :birthdate, :include_blank => true, :start_year => Date.today.year - 90, :end_year => Date.today.year - 3, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :belt_size %><br>
+        <%= f.text_field :belt_size, class: 'form-control' %>
+      </div>
+      <div class="form-check">
+        <%= f.check_box :active, class: 'form-check-input' %>
+        <%= f.label :active, class: 'form-check-label' %><br>
+      </div>
+      <% if local_assigns[:add_initial_rank] %>
+      <div class="form-group">
+        <%= f.label :rank_id, 'Initial Rank' %><br>
+        <%= collection_select :initial_rank, :rank_id, Rank.where(active: true).order(:style_id,:order), :id, :style_and_rank, {class: 'form-control'}%>
+      </div>
+      <% end %>
+      <div class="actions">
+        <%= button_tag :type => 'submit', :class => 'btn btn-success' do %> 
+          <i class="glyphicon glyphicon-plus"></i> Add
+        <% end %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :surname %><br>
-    <%= f.text_field :surname %>
-  </div>
-  <div class="field">
-    <%= f.label :birthdate %><br>
-    <%= f.date_select :birthdate, :include_blank => true, :start_year => Date.today.year - 90, :end_year => Date.today.year - 3 %>
-  </div>
-  <div class="field">
-    <%= f.label :belt_size %><br>
-    <%= f.text_field :belt_size %>
-  </div>
-  <div class="field">
-    <%= f.label :active %><br>
-    <%= f.check_box :active %>
-  </div>
-  <% if local_assigns[:add_initial_rank] %>
-  <div class="form-group">
-    <%= f.label :rank_id, 'Initial Rank' %><br>
-    <%= collection_select :initial_rank, :rank_id, Rank.where(active: true).order(:style_id,:order), :id, :style_and_rank, {class: 'form-control'}%>
-  </div>
-  <% end %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
