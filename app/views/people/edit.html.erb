@@ -1,6 +1,11 @@
 <h1>Editing Person</h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @person %> |
-<%= link_to 'Back', people_path %>
+<p></p>
+<%= link_to person_path(@person), :class => 'btn btn-success' do %>
+  <i class="glyphicon glyphicon-education"></i> Profile
+<% end %>
+&nbsp;
+<%= link_to people_path, :class => 'btn btn-primary' do %>
+  <i class="glyphicon glyphicon-user"></i> List
+<% end %>

@@ -1,5 +1,7 @@
 <h1>New Person</h1>
 
 <%= render partial: 'form', locals: {add_initial_rank: true} %>
-
-<%= link_to 'Back', people_path %>
+<p></p>
+<%= link_to people_path, :class => 'btn btn-primary' do %>
+  <i class="glyphicon glyphicon-user"></i> List
+<% end %>
