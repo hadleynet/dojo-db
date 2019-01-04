@@ -31,7 +31,7 @@
         <% if is_admin? %>
         <td class="text-center no_print">
         <% if classes[1]==0 %>
-            <%= link_to deactivate_person_path(person), method: :POST, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-warning' do %>
+            <%= link_to deactivate_person_path(person), method: :POST, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger' do %>
               <i class="glyphicon glyphicon-pencil"></i> Deactivate
             <% end %>
         <% end %>

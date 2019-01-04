@@ -37,6 +37,9 @@
             <%= link_to edit_person_path(person), :class => 'btn btn-sm btn-warning' do %>
               <i class="glyphicon glyphicon-pencil"></i> Edit
             <% end %>
+            <%= link_to deactivate_person_path(person), method: :POST, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger' do %>
+              <i class="glyphicon glyphicon-pencil"></i> Deactivate
+            <% end %>
           </td>
           <% end %>
         </tr>
